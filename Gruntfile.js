@@ -85,7 +85,8 @@ module.exports = function(grunt) {
         },
         env: {
             dev: {
-                NODE_ENV: 'development'
+                NODE_ENV: 'development',
+                FEEDBACK: 'false'
             }
         },
         express: {
@@ -178,7 +179,8 @@ module.exports = function(grunt) {
 
                 var template = handlebars.compile(data);
                 var html = template({
-                    DEBUG: true
+                    DEBUG: true,
+                    FEEDBACK: false
                 });
                 var to = "public/" + item + ".html";
                 fs.writeFile(to, html, function(err) {

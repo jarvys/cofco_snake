@@ -91,6 +91,11 @@ app.get('/desktop', function(req, res, next) {
 	});
 });
 
+var feedback = true;
+if (process.env.FEEDBACK === 'false') {
+	feedback = false;
+}
+
 var _mobile_template = null;
 app.get('/mobile', function(req, res, next) {
 	fs.readFile("templates/mobile.hbs", "utf-8", function(err, data) {
@@ -100,7 +105,8 @@ app.get('/mobile', function(req, res, next) {
 
 		_mobile_template = _mobile_template || handlebars.compile(data);
 		var html = _mobile_template({
-			DEBUG: process.env.NODE_ENV === 'development'
+			DEBUG: process.env.NODE_ENV === 'development',
+			FEEDBACK: feedback
 		});
 		res.send(html);
 	});
