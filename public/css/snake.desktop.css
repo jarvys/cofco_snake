@@ -76,7 +76,7 @@
 .snake-container-wrap .snake-container .control-bar {
   width: 158px;
   height: 454px;
-  padding-bottom: 43px;
+  padding-bottom: 46px;
   display: inline-block;
   vertical-align: bottom;
 }
@@ -86,6 +86,8 @@
   width: 158px;
   height: 454px;
   color: #fcf1f1;
+}
+.snake-container-wrap .snake-container .scorebar .score {
   padding-top: 25px;
 }
 .snake-container-wrap .snake-container .scorebar .score,

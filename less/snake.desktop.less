@@ -10,7 +10,7 @@
 
 @coupletWidth: 158px;
 @coupletHeight: 454px;
-@coupletBottom: 43px;
+@coupletBottom: 46px;
 
 .couplet() {
 	width:	@coupletWidth;
@@ -99,7 +99,10 @@
 		.scorebar {
 			.sprite(@couplet_left);
 		    color: #fcf1f1;
-		    padding-top: 25px;
+
+		    .score {
+		    	padding-top: 25px;
+		    }
 
 		    .score, .rank {
 			    margin-top: 25px;
