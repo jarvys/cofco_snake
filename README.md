@@ -17,7 +17,7 @@ cofco_snake
 │   ├── desktop.html 由templates/desktop.hbs 编译生成的静态html文件
 │   └── mobile.html 由templates/mobile.hbs 编译生成的静态html文件
 ├── src 游戏代码
-│   ├── api.js 封装ajax接口、分享和登录模块
+│   ├── api.js !!!封装ajax接口、分享和登录模块
 │   ├── ...
 │   ├── ...
 └── templates 服务使用的页面模板
