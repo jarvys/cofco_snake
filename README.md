@@ -5,30 +5,30 @@
 
 ###工程结构和重要文件介绍：
 ```
-cofco_snake
-├── app.js 测试服务代码
-├── images 图片素材
+cofco_snake  
+├── app.js 测试服务代码  
+├── images 图片素材  
 ├── public 所有的静态文件
-│   ├── css
-│   ├── fonts
-│   ├── images
-│   ├── js
-│   ├── json
-│   ├── desktop.html 由templates/desktop.hbs 编译生成的静态html文件
-│   └── mobile.html 由templates/mobile.hbs 编译生成的静态html文件
-├── src 游戏代码
-│   ├── api.js !!!封装ajax接口、分享和登录模块
-│   ├── ...
-│   ├── ...
-└── templates 服务使用的页面模板
-    ├── desktop.hbs
-    └── mobile.hbs
+│   ├── css  
+│   ├── fonts  
+│   ├── images  
+│   ├── js  
+│   ├── json  
+│   ├── desktop.html 由templates/desktop.hbs 编译生成的静态html文件  
+│   └── mobile.html 由templates/mobile.hbs 编译生成的静态html文件  
+├── src 游戏代码  
+│   ├── api.js !!!封装ajax接口、分享和登录模块   
+│   ├── ...  
+│   ├── ...  
+└── templates 服务使用的页面模板  
+    ├── desktop.hbs  
+    └── mobile.hbs  
 ```
 
 
 ##开发
 ###具体的搭建步骤：
-```bash
+```
 git clone https://github.com/jiarvis/cofco_snake
 
 npm install -g bower lessc grunt-cli   #安装bower，less和grunt
@@ -43,7 +43,7 @@ node app.js   #运行服务
 
 
 ###导出静态文件:
-```bash
+```
 grunt templates   #导出html文件
 grunt sprite   #导出图片
 grunt less   #导出css文件
