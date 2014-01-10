@@ -1260,8 +1260,10 @@ _Controller = {
 	},
 
 	showInfo: function() {
-		this.$currentScore.html("0");
+		this.$currentScore.html(this.game ? this.game.score() : 0);
 		this.$totalScore.html(this.user.score);
+		this.$totalRank.html(this.user.total_rank);
+		this.$currentRank.html(this.user.current_rank);
 	}
 };
 
@@ -1272,8 +1274,6 @@ function Controller(el) {
 	this.$canvas = this.$el.find('canvas');
 	this.canvas = this.$canvas[0];
 	_Controller.initRender.call(this);
-
-
 
 	this.user = null;
 	this.rounds = 0;
@@ -1309,8 +1309,10 @@ u.extend(Controller.prototype, {
 		window.onresize = _ensureCanvasSize;
 		_ensureCanvasSize();
 
-		this.$currentScore = this.$el.find(".current.score");
-		this.$totalScore = this.$el.find(".total.score");
+		this.$currentScore = this.$el.find(".score .current");
+		this.$totalScore = this.$el.find(".score .total");
+		this.$currentRank = this.$el.find(".rank .current");
+		this.$totalRank = this.$el.find(".rank .total");
 		_Controller.showInfo.call(this);
 
 		this.$control = this.$el.find(".control");

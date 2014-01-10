@@ -39,7 +39,7 @@
 
 		button.control {
 			.button-size(0px; 5px; 12px; 14px; 0px);
-			.sprite(@bt_pause_normal);
+			.sprite(@bt_play_normal);
 			background-color: transparent;
 			border: none;
 			cursor: pointer;
@@ -49,15 +49,15 @@
 		}
 
 		button.control:active {
-			.sprite(@bt_pause_pressed);
-		}
-
-		button.control.pause {
 			.sprite(@bt_play_normal);
 		}
 
+		button.control.pause {
+			.sprite(@bt_pause_normal);
+		}
+
 		button.control.pause:active {
-			.sprite(@bt_play_pressed);
+			.sprite(@bt_pause_pressed);
 		}
 	}
 

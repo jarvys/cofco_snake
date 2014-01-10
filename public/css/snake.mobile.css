@@ -61,7 +61,7 @@
   line-height: 14px;
   border-radius: 0px;
   background-image: url(../images/mobile.png);
-  background-position: 0px 0px;
+  background-position: 0px -130px;
   width: 55px;
   height: 55px;
   background-color: transparent;
@@ -73,19 +73,19 @@
 }
 .snake-container-wrap .header button.control:active {
   background-image: url(../images/mobile.png);
-  background-position: 0px -65px;
+  background-position: 0px -130px;
   width: 55px;
   height: 55px;
 }
 .snake-container-wrap .header button.control.pause {
   background-image: url(../images/mobile.png);
-  background-position: 0px -130px;
+  background-position: 0px 0px;
   width: 55px;
   height: 55px;
 }
 .snake-container-wrap .header button.control.pause:active {
   background-image: url(../images/mobile.png);
-  background-position: 0px -195px;
+  background-position: 0px -65px;
   width: 55px;
   height: 55px;
 }
