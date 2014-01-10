@@ -106,7 +106,7 @@ module.exports = function(grunt) {
             dev: {
                 options: {
                     background: true,
-                    debug: false,
+                    debug: true,
                     script: 'app.js'
                 }
             }

@@ -32,6 +32,7 @@ function startServer() {
 	app.use(express.static(__dirname + '/public'));
 	app.use(useragent.express());
 	app.use("/libs", express.static(__dirname + '/bower_components'));
+	app.use(express.bodyParser());
 
 	app.post('/game/api/shareToFriends', function(req, res) {
 		res.send({
@@ -55,8 +56,8 @@ function startServer() {
 	});
 
 	app.post('/game/api/addScore', function(req, res) {
-		var score = parseInt(req.query.score, 10);
-		var member_id = parseInt(req.query.member_id, 10);
+		var score = parseInt(req.param("score"), 10);
+		var member_id = parseInt(req.param("member_id"), 10);
 
 		user.score += score;
 		if (score > 0) {
@@ -74,7 +75,7 @@ function startServer() {
 	});
 
 	app.post('/game/api/getTotalScore', function(req, res) {
-		var member_id = parseInt(req.query.member_id, 10);
+		var member_id = parseInt(req.param("member_id"), 10);
 
 		res.send({
 			status: 1,
@@ -84,7 +85,7 @@ function startServer() {
 	});
 
 	app.post('/game/api/getScoreRank', function(req, res) {
-		var member_id = parseInt(req.query.member_id, 10);
+		var member_id = parseInt(req.param("member_id"), 10);
 
 		// TODO 修改成两种排名
 		res.send({
