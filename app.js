@@ -41,7 +41,7 @@ function startServer() {
 		});
 	});
 
-	app.get('/game/api/getMemberInfo', function(req, res) {
+	app.post('/game/api/getMemberInfo', function(req, res) {
 		res.send({
 			status: 1,
 			info: '',
@@ -54,7 +54,7 @@ function startServer() {
 		});
 	});
 
-	app.get('/game/api/addScore', function(req, res) {
+	app.post('/game/api/addScore', function(req, res) {
 		var score = parseInt(req.query.score, 10);
 		var member_id = parseInt(req.query.member_id, 10);
 
@@ -73,7 +73,7 @@ function startServer() {
 		});
 	});
 
-	app.get('/game/api/getTotalScore', function(req, res) {
+	app.post('/game/api/getTotalScore', function(req, res) {
 		var member_id = parseInt(req.query.member_id, 10);
 
 		res.send({
@@ -83,7 +83,7 @@ function startServer() {
 		});
 	});
 
-	app.get('/game/api/getScoreRank', function(req, res) {
+	app.post('/game/api/getScoreRank', function(req, res) {
 		var member_id = parseInt(req.query.member_id, 10);
 
 		// TODO 修改成两种排名

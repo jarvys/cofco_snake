@@ -324,13 +324,13 @@ var api = {
 	},
 
 	addScore: function(params, callback) {
-		$.get('/game/api/addScore', params, "json")
+		$.post('/game/api/addScore', params, "json")
 			.success(api._handle(callback))
 			.error(api._onerror(callback));
 	},
 
 	getTotalScore: function(member_id, callback) {
-		$.get('/game/api/getTotalScore', {
+		$.post('/game/api/getTotalScore', {
 			member_id: member_id
 		}, "json")
 			.success(api._handle(callback))
@@ -338,13 +338,13 @@ var api = {
 	},
 
 	getUserinfo: function(callback) {
-		$.get('/game/api/getMemberInfo', {}, "json")
+		$.post('/game/api/getMemberInfo', {}, "json")
 			.success(api._handle(callback))
 			.error(api._onerror(callback));
 	},
 
 	getRank: function(member_id, callback) {
-		$.get('/game/api/getScoreRank', {
+		$.post('/game/api/getScoreRank', {
 			member_id: member_id
 		}, "json")
 			.success(api._handle(callback))
@@ -1296,10 +1296,12 @@ u.extend(Controller.prototype, {
 		}
 
 		this.$controlbar = this.$el.find(".header");
+
 		function _ensureCanvasSize() {
-			var size = Math.min(window.innerWidth, window.innerHeight);
+			var padding = 20;
 			var controlbar_height = self.$controlbar.outerHeight();
-			size -= controlbar_height;
+			var size = Math.min(self.$el.width() - padding * 2,
+				window.innerHeight - controlbar_height);
 			self.$canvas.css('width', size + "px");
 			self.$canvas.css('height', size + "px");
 			self.render.draw();

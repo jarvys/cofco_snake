@@ -204,10 +204,12 @@ u.extend(Controller.prototype, {
 		}
 
 		this.$controlbar = this.$el.find(".header");
+
 		function _ensureCanvasSize() {
-			var size = Math.min(window.innerWidth, window.innerHeight);
+			var padding = 20;
 			var controlbar_height = self.$controlbar.outerHeight();
-			size -= controlbar_height;
+			var size = Math.min(self.$el.width() - padding * 2,
+				window.innerHeight - controlbar_height);
 			self.$canvas.css('width', size + "px");
 			self.$canvas.css('height', size + "px");
 			self.render.draw();

@@ -1,0 +1,66 @@
+  @bt_pause_normal-x: 0px;
+  @bt_pause_normal-y: 0px;
+  @bt_pause_normal-offset-x: 0px;
+  @bt_pause_normal-offset-y: 0px;
+  @bt_pause_normal-width: 55px;
+  @bt_pause_normal-height: 55px;
+  @bt_pause_normal-total-width: 55px;
+  @bt_pause_normal-total-height: 250px;
+  @bt_pause_normal-image: '../images/mobile.png';
+  @bt_pause_normal: 0px 0px 0px 0px 55px 55px 55px 250px '../images/mobile.png';
+  @bt_pause_pressed-x: 0px;
+  @bt_pause_pressed-y: 65px;
+  @bt_pause_pressed-offset-x: 0px;
+  @bt_pause_pressed-offset-y: -65px;
+  @bt_pause_pressed-width: 55px;
+  @bt_pause_pressed-height: 55px;
+  @bt_pause_pressed-total-width: 55px;
+  @bt_pause_pressed-total-height: 250px;
+  @bt_pause_pressed-image: '../images/mobile.png';
+  @bt_pause_pressed: 0px 65px 0px -65px 55px 55px 55px 250px '../images/mobile.png';
+  @bt_play_normal-x: 0px;
+  @bt_play_normal-y: 130px;
+  @bt_play_normal-offset-x: 0px;
+  @bt_play_normal-offset-y: -130px;
+  @bt_play_normal-width: 55px;
+  @bt_play_normal-height: 55px;
+  @bt_play_normal-total-width: 55px;
+  @bt_play_normal-total-height: 250px;
+  @bt_play_normal-image: '../images/mobile.png';
+  @bt_play_normal: 0px 130px 0px -130px 55px 55px 55px 250px '../images/mobile.png';
+  @bt_play_pressed-x: 0px;
+  @bt_play_pressed-y: 195px;
+  @bt_play_pressed-offset-x: 0px;
+  @bt_play_pressed-offset-y: -195px;
+  @bt_play_pressed-width: 55px;
+  @bt_play_pressed-height: 55px;
+  @bt_play_pressed-total-width: 55px;
+  @bt_play_pressed-total-height: 250px;
+  @bt_play_pressed-image: '../images/mobile.png';
+  @bt_play_pressed: 0px 195px 0px -195px 55px 55px 55px 250px '../images/mobile.png';
+
+  .sprite-width(@sprite) {
+    width: ~`"@{sprite}".split(', ')[4]`;
+  }
+
+  .sprite-height(@sprite) {
+    height: ~`"@{sprite}".split(', ')[5]`;
+  }
+
+  .sprite-position(@sprite) {
+    @sprite-offset-x: ~`"@{sprite}".split(', ')[2]`;
+    @sprite-offset-y: ~`"@{sprite}".split(', ')[3]`;
+    background-position: @sprite-offset-x  @sprite-offset-y;
+  }
+
+  .sprite-image(@sprite) {
+    @sprite-image: ~`"@{sprite}".split(', ')[8].slice(1, -2)`;
+    background-image: url(@sprite-image);
+  }
+
+  .sprite(@sprite) {
+    .sprite-image(@sprite);
+    .sprite-position(@sprite);
+    .sprite-width(@sprite);
+    .sprite-height(@sprite);
+  }

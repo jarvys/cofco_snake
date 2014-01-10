@@ -1,8 +1,10 @@
 @import "../bower_components/bootstrap/less/mixins.less";
 @import "../bower_components/bootstrap/less/component-animations.less";
 @import "base.less";
+@import "mobile_res.less";
 
 .snake-container-wrap {
+	background-color: #e8392a;
 	width: 100%;
 	position: relative;
 	.jianzhi();
@@ -12,14 +14,50 @@
 	}
 
 	.header {
-		border: 1px solid #F1F1F1;
-		padding: 5px;
+		padding: 5px 10px;
+		overflow: hidden;
+
+		.info {
+			color: #fff;
+			float: left;
+			text-align: center;
+
+			span {
+				font-size: 14px;
+				padding: 5px 0px;
+				font-weight: normal;
+				display: block;
+				width: 75px;
+			}
+		}
+
+		@media screen and (max-width: 380px) {
+			.info.rank {
+				display: none;
+			}
+		}
 
 		button.control {
-			.button-variant(#333; #FFF; #FFF);
 			.button-size(0px; 5px; 12px; 14px; 0px);
+			.sprite(@bt_pause_normal);
+			background-color: transparent;
+			border: none;
+			cursor: pointer;
+			outline: none;;
 			display: block;
 			float: right;
+		}
+
+		button.control:active {
+			.sprite(@bt_pause_pressed);
+		}
+
+		button.control.pause {
+			.sprite(@bt_play_normal);
+		}
+
+		button.control.pause:active {
+			.sprite(@bt_play_pressed);
 		}
 	}
 

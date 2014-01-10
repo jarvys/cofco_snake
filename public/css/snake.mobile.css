@@ -25,6 +25,7 @@
   src: url(../fonts/jianzhi.eot?#iefix) format('embedded-opentype'), url(../fonts/jianzhi.woff) format('woff'), url(../fonts/jianzhi.ttf) format('truetype');
 }
 .snake-container-wrap {
+  background-color: #e8392a;
   width: 100%;
   position: relative;
   font-family: "jianzhi", "微软雅黑";
@@ -34,55 +35,59 @@
   display: none;
 }
 .snake-container-wrap .header {
-  border: 1px solid #F1F1F1;
-  padding: 5px;
+  padding: 5px 10px;
+  overflow: hidden;
+}
+.snake-container-wrap .header .info {
+  color: #fff;
+  float: left;
+  text-align: center;
+}
+.snake-container-wrap .header .info span {
+  font-size: 14px;
+  padding: 5px 0px;
+  font-weight: normal;
+  display: block;
+  width: 75px;
+}
+@media screen and (max-width: 380px) {
+  .snake-container-wrap .header .info.rank {
+    display: none;
+  }
 }
 .snake-container-wrap .header button.control {
-  color: #333333;
-  background-color: #ffffff;
-  border-color: #ffffff;
   padding: 0px 5px;
   font-size: 12px;
   line-height: 14px;
   border-radius: 0px;
+  background-image: url(../images/mobile.png);
+  background-position: 0px 0px;
+  width: 55px;
+  height: 55px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
   display: block;
   float: right;
 }
-.snake-container-wrap .header button.control:hover,
-.snake-container-wrap .header button.control:focus,
-.snake-container-wrap .header button.control:active,
-.snake-container-wrap .header button.control.active,
-.open .dropdown-toggle.snake-container-wrap .header button.control {
-  color: #333333;
-  background-color: #ebebeb;
-  border-color: #e0e0e0;
+.snake-container-wrap .header button.control:active {
+  background-image: url(../images/mobile.png);
+  background-position: 0px -65px;
+  width: 55px;
+  height: 55px;
 }
-.snake-container-wrap .header button.control:active,
-.snake-container-wrap .header button.control.active,
-.open .dropdown-toggle.snake-container-wrap .header button.control {
-  background-image: none;
+.snake-container-wrap .header button.control.pause {
+  background-image: url(../images/mobile.png);
+  background-position: 0px -130px;
+  width: 55px;
+  height: 55px;
 }
-.snake-container-wrap .header button.control.disabled,
-.snake-container-wrap .header button.control[disabled],
-fieldset[disabled] .snake-container-wrap .header button.control,
-.snake-container-wrap .header button.control.disabled:hover,
-.snake-container-wrap .header button.control[disabled]:hover,
-fieldset[disabled] .snake-container-wrap .header button.control:hover,
-.snake-container-wrap .header button.control.disabled:focus,
-.snake-container-wrap .header button.control[disabled]:focus,
-fieldset[disabled] .snake-container-wrap .header button.control:focus,
-.snake-container-wrap .header button.control.disabled:active,
-.snake-container-wrap .header button.control[disabled]:active,
-fieldset[disabled] .snake-container-wrap .header button.control:active,
-.snake-container-wrap .header button.control.disabled.active,
-.snake-container-wrap .header button.control[disabled].active,
-fieldset[disabled] .snake-container-wrap .header button.control.active {
-  background-color: #ffffff;
-  border-color: #ffffff;
-}
-.snake-container-wrap .header button.control .badge {
-  color: #ffffff;
-  background-color: #fff;
+.snake-container-wrap .header button.control.pause:active {
+  background-image: url(../images/mobile.png);
+  background-position: 0px -195px;
+  width: 55px;
+  height: 55px;
 }
 .snake-container-wrap .content canvas {
   display: block;

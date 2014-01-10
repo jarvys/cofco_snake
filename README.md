@@ -6,23 +6,26 @@
 ###工程结构和重要文件介绍：
 ```
 cofco_snake  
-├── app.js 测试服务代码  
-├── images 图片素材  
-├── public 所有的静态文件
+├── app.js    #测试服务代码  
+├── images    #图片素材  
+├── public    #所有的静态文件
 │   ├── css  
 │   ├── fonts  
 │   ├── images  
 │   ├── js  
-│   ├── json  
-│   ├── desktop.html 由templates/desktop.hbs 编译生成的静态html文件  
-│   └── mobile.html 由templates/mobile.hbs 编译生成的静态html文件  
+│   ├── json    #游戏sprite的元数据  
+│   ├── desktop.html    #templates/desktop.hbs --> public/desktop.html  
+│   └── mobile.html    #templates/mobile.hbs --> public/mobile.html
 ├── src 游戏代码  
-│   ├── api.js !!!封装ajax接口、分享和登录模块   
-│   ├── ...  
-│   ├── ...  
-└── templates 服务使用的页面模板  
-    ├── desktop.hbs  
-    └── mobile.hbs  
+│   ├── api.js    #!!!封装ajax接口、分享和登录模块   
+│   ├── desktop.js    #!!!pc版游戏的控制模块
+│   ├── mobile.js   #!!!mobile版的控制模块 
+│   └── ... 
+└── templates   #服务使用的页面模板  
+    ├── desktop.hbs    #pc版游戏模板
+    ├── friends.hbs    #好友列表弹出框模板
+    ├── login.hbs    #授权登录弹出框模板
+    └── mobile.hbs    #mobile版游戏模板
 ```
 
 

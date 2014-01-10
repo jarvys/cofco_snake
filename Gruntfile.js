@@ -65,6 +65,18 @@ module.exports = function(grunt) {
                 destImg: '<%= static_dir %>/images/canvas.png',
                 padding: 10,
                 destCSS: '<%= static_dir %>/json/canvas.json'
+            },
+            mobile: {
+                src: "images/mobile/*.png",
+                destImg: '<%= static_dir %>/images/mobile.png',
+                padding: 10,
+                destCSS: 'less/mobile_res.less',
+                imgPath: '../images/mobile.png',
+                cssOpts: {
+                    cssClass: function(item) {
+                        return '.snake-' + item.name;
+                    }
+                }
             }
         },
         less: {

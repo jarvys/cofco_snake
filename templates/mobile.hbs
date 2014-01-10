@@ -15,11 +15,24 @@
     <div class="snake-container-wrap">
         <div class="snake-container">
         	<div class="header">
-    	       <span class="prop">总积分：</span>
-        	   <span class="total score">0</span>
-        	   <span class="prop">当前积分：</span>
-        	   <span class="current score">0</span>
-        	   <button class='control'>开始</button>
+                <div class="info score">
+                   <span class="prop">本局得分</span>
+                   <span class="current">0</span>
+                </div>
+                <div class="info score">
+    	           <span class="prop">总积分</span>
+        	       <span class="total">0</span>
+                </div>
+                
+                <div class="info rank">
+                   <span class="prop">当前排名</span>
+                   <span class="current">0</span>
+                </div>
+                <div class="info rank">
+                   <span class="prop">总排名</span>
+                   <span class="total">0</span>
+                </div>
+                <button class='control'></button>
         	</div>
             <div class='content'>
                 <canvas class='canvas' id="snake" width="600" height="600"></canvas>
@@ -38,7 +51,7 @@
     </script>
     <script type="text/javascript" src="js/async.js"></script>
 
-    {{#if FEEDBACK}}
+    {{#if DEBUG}}
     <script type="text/javascript" src="js/snake.mobile.js"></script>
     {{else}}
     <script type="text/javascript" src="js/snake.mobile.min.js">
