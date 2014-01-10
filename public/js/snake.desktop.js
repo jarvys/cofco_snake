@@ -1320,7 +1320,7 @@ var _Controller = {
         _Controller.kickOff.call(this);
         _Controller.resume.call(this);
         this.render.draw();
-        this.canvas.scrollIntoView();
+        this.el.scrollIntoView(true);
     },
 
     initRender: function(canvas) {
@@ -1341,6 +1341,8 @@ Controller.prototype = {
     onload: function(canvas, user) {
         var self = this;
 
+        this.$el = $(".snake-container-wrap");
+        this.el = this.$el[0];
         var $loadingPanel = $(".snake-loading-pane");
         $loadingPanel.find("h1").hide();
         if (!user) {
