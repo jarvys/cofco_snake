@@ -304,7 +304,6 @@ cookie.enabled = function() {
 ;
 
 // api
-
 var api = {
 	NETWORK_ERROR: 'network error',
 	STATUS_ERROR: 'status error',
@@ -352,6 +351,7 @@ var api = {
 			.error(api._onerror(callback));
 	},
 
+	// 获取用户信息：获取用户信息-->获取用户排名
 	getInfoInNeed: function(callback) {
 		function _getUserInfo(callback) {
 			api.getUserinfo(function(err, user) {
@@ -380,11 +380,13 @@ var api = {
 				}
 
 				callback(null, user);
+				// callback(null, null);
 			}
 			//)
 		);
 	},
 
+	// 同步积分，上传积分-->获取用户信息-->获取用户排名
 	sync_score: function(member_id, score, callback) {
 		function _addScore(callback) {
 			api.addScore({
@@ -432,6 +434,61 @@ var api = {
 		);
 	}
 };
+
+(function(module) {
+	var browser_width = $(window).width();
+	var browser_height = $(window).height();
+
+	function _alert(id) {
+		var width = $('#' + id).width();
+		var height = $('#' + id).height();
+		var left = (browser_width - width) / 2;
+		var top = (browser_height - height) / 3;
+
+		$('#' + id).css('position', 'fixed').css('top', top).css('left', left).css('z-index', 2000).show();
+		$('#over-layout').show();
+	}
+
+	$(function() {
+		$('.close-btn').click(function() {
+			$('.tk-share').hide();
+			$('#over-layout').hide();
+		});
+
+		$("#friends-share-submit").click(function() {
+			var array = [];
+			u.each(friends, function(friend) {
+				array.push("@" + friend);
+			});
+			friendParam = array.join(" ");
+
+			$.post("/game/api/shareToFriends", {
+				member_id: member_id,
+				score: score,
+				friends: friendParam
+			}).success(function(data) {
+				alert(data);
+			}).error(function() {
+				alert('error');
+			});
+		});
+	});
+
+	module.login = function() {
+		_alert("_auth_xxx");
+	};
+
+	var member_id;
+	var score;
+	var friends = [];
+
+	module.share = function(_member_id, _score) {
+		_alert("_friend_xxx");
+
+		member_id = _member_id;
+		score = _score;
+	};
+})(api);
 
 ;
 
@@ -1075,6 +1132,12 @@ function GameOverPane(el) {
             self.onRestartHandler();
         }
     });
+
+    this.$el.find('.share').click(function() {
+        if(self.onShareHandler) {
+            self.onShareHandler();
+        }
+    });
 }
 
 GameOverPane.prototype = {
@@ -1082,6 +1145,10 @@ GameOverPane.prototype = {
 
     showGift: function() {
         this.$el.find(".courage-section").removeClass('hide');
+    },
+
+    onShare: function(handler) {
+        this.onShareHandler = handler;
     },
 
     setScore: function(score) {
@@ -1253,7 +1320,7 @@ var _Controller = {
         _Controller.kickOff.call(this);
         _Controller.resume.call(this);
         this.render.draw();
-        this.canvas.scrollintoview();
+        this.canvas.scrollIntoView();
     },
 
     initRender: function(canvas) {
@@ -1278,7 +1345,7 @@ Controller.prototype = {
         $loadingPanel.find("h1").hide();
         if (!user) {
             $loadingPanel.find("button").show().click(function() {
-                // TODO
+                api.login();
             });
             return;
         }
@@ -1297,6 +1364,9 @@ Controller.prototype = {
         this.loadingPane = new Modal($(".snake-modal-wrap.loading")[0]);
         this.errorPane = new Modal($(".snake-modal-wrap.error")[0]);
         this.gameoverPane = new GameOverPane($(".gameover")[0]);
+        this.gameoverPane.onShare(function() {
+            api.share(self.user.member_id, self.game.score());
+        });
         this.gameoverPane.onRestart(function() {
             self.$overlay.hide();
             self.gameoverPane.hide();

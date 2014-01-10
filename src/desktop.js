@@ -40,6 +40,12 @@ function GameOverPane(el) {
             self.onRestartHandler();
         }
     });
+
+    this.$el.find('.share').click(function() {
+        if(self.onShareHandler) {
+            self.onShareHandler();
+        }
+    });
 }
 
 GameOverPane.prototype = {
@@ -47,6 +53,10 @@ GameOverPane.prototype = {
 
     showGift: function() {
         this.$el.find(".courage-section").removeClass('hide');
+    },
+
+    onShare: function(handler) {
+        this.onShareHandler = handler;
     },
 
     setScore: function(score) {
@@ -218,7 +228,7 @@ var _Controller = {
         _Controller.kickOff.call(this);
         _Controller.resume.call(this);
         this.render.draw();
-        this.canvas.scrollintoview();
+        this.canvas.scrollIntoView();
     },
 
     initRender: function(canvas) {
@@ -243,7 +253,7 @@ Controller.prototype = {
         $loadingPanel.find("h1").hide();
         if (!user) {
             $loadingPanel.find("button").show().click(function() {
-                // TODO
+                api.login();
             });
             return;
         }
@@ -262,6 +272,9 @@ Controller.prototype = {
         this.loadingPane = new Modal($(".snake-modal-wrap.loading")[0]);
         this.errorPane = new Modal($(".snake-modal-wrap.error")[0]);
         this.gameoverPane = new GameOverPane($(".gameover")[0]);
+        this.gameoverPane.onShare(function() {
+            api.share(self.user.member_id, self.game.score());
+        });
         this.gameoverPane.onRestart(function() {
             self.$overlay.hide();
             self.gameoverPane.hide();

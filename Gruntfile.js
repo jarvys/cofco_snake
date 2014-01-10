@@ -1,6 +1,7 @@
-var async = require("async"),
-    fs = require("fs"),
-    handlebars = require("handlebars");
+var async = require("async");
+var fs = require("fs");
+var handlebars = require("handlebars");
+var registerTemplates = require("./templates");
 
 module.exports = function(grunt) {
     var common = [
@@ -170,6 +171,20 @@ module.exports = function(grunt) {
     grunt.registerTask('templates', 'generate templates', function() {
         var done = this.async();
 
+        registerTemplates(handlebars, function(err) {
+            if (err) {
+                return done(false);
+            }
+
+            async.each(["mobile", "desktop"], compile, function(err) {
+                if (err) {
+                    done(false);
+                } else {
+                    done();
+                }
+            });
+        });
+
         function compile(item, callback) {
             var path = "templates/" + item + ".hbs";
             fs.readFile(path, "utf-8", function(err, data) {
@@ -192,13 +207,5 @@ module.exports = function(grunt) {
                 });
             });
         }
-
-        async.each(["mobile", "desktop"], compile, function(err) {
-            if (err) {
-                done(false);
-            } else {
-                done();
-            }
-        });
     });
 };

@@ -14,6 +14,15 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="/js/flashcanvas.js"></script>
     <![endif]-->
+
+    <link rel="stylesheet" type="text/css"  href="../css/common.css">
+
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../js/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>
+        DD_belatedPNG.fix('*');
+    </script>
+    <![endif]-->
 </head>
 <body style="margin: 0px;">
     
@@ -150,10 +159,18 @@
         </div>
     </div>
 
+
+    {{> friends}}
+    {{> login}}
+
+
     <!-- 依赖的代码库 -->
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/jquery.hammer.min.js"></script>
     <script type="text/javascript" src="/js/async.js"></script>
+
+    <script type="text/javascript" src="/js/jquery-foxibox-0.2.min.js">
+    </script>
 
     <!-- 功能代码 -->
     {{#if DEBUG}}
