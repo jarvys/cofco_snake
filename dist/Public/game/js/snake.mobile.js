@@ -14,7 +14,7 @@ var requestAnimationFrame = window.requestAnimationFrame ||
 	window.mozRequestAnimationFrame ||
 	_nextTick;
 
-console.log(requestAnimationFrame);
+
 
 ;
 

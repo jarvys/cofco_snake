@@ -360,9 +360,9 @@
   margin-left: 40px;
 }
 .snake-container-wrap .rules {
-  top: 50%;
-  bottom: none;
-  margin-top: -350px;
+  height: auto;
+  top: 20px;
+  bottom: 20px;
 }
 .snake-container-wrap .rules .snake-modal {
   font-family: "微软雅黑";
