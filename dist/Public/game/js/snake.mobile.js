@@ -1451,6 +1451,7 @@ u.extend(Controller.prototype, {
 		this.$startModal = this.$el.find(".start-modal");
 
 		if (!user) {
+			this.$startModal.show();
 			this.$startModal.on('click', 'button', function() {
 				// TODO 跳转的指定的登录页面
 				window.location = "";
