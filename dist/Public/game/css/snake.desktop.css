@@ -29,8 +29,9 @@
 }
 .snake-container-wrap {
   background-image: url(../images/resources.png);
-  background-position: 0px -2928px;
-  height: 720px;
+  background-position: 0px -1918px;
+  width: 940px;
+  height: 585px;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -40,7 +41,7 @@
   -o-user-select: none;
   user-select: none;
   font-family: 'jianzhi', '微软雅黑';
-  width: 1156px;
+  width: 940;
   position: relative;
 }
 .snake-container-wrap h1,
@@ -49,16 +50,16 @@
   text-align: center;
 }
 .snake-container-wrap h1 {
-  font-size: 32px;
+  font-size: 24px;
 }
 .snake-container-wrap h2 {
-  font-size: 24px;
+  font-size: 19.2px;
 }
 .snake-container-wrap .bottom {
   background-image: url(../images/resources.png);
-  background-position: 0px -1023px;
-  width: 1156px;
-  height: 323px;
+  background-position: 0px -895px;
+  width: 940px;
+  height: 263px;
   position: absolute;
   bottom: 0px;
 }
@@ -69,84 +70,86 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 996px;
+  width: 800px;
   overflow: hidden;
 }
 .snake-container-wrap .snake-container .scorebar,
 .snake-container-wrap .snake-container .control-bar {
-  width: 158px;
-  height: 454px;
-  padding-bottom: 46px;
+  width: 127px;
+  height: 365px;
+  padding-bottom: 34px;
   display: inline-block;
   vertical-align: bottom;
 }
 .snake-container-wrap .snake-container .scorebar {
   background-image: url(../images/resources.png);
-  background-position: 0px -1356px;
-  width: 158px;
-  height: 454px;
+  background-position: 0px -1168px;
+  width: 127px;
+  height: 365px;
   color: #fcf1f1;
 }
 .snake-container-wrap .snake-container .scorebar .score {
-  padding-top: 25px;
+  padding-top: 20px;
 }
 .snake-container-wrap .snake-container .scorebar .score,
 .snake-container-wrap .snake-container .scorebar .rank {
-  margin-top: 25px;
+  margin-top: 20px;
 }
 .snake-container-wrap .snake-container .scorebar .score h2,
 .snake-container-wrap .snake-container .scorebar .rank h2 {
-  line-height: 40px;
+  line-height: 32px;
   margin: 0px;
 }
 .snake-container-wrap .snake-container .control-bar {
   background-image: url(../images/resources.png);
-  background-position: 0px -1820px;
-  width: 158px;
-  height: 454px;
+  background-position: 0px -1543px;
+  width: 127px;
+  height: 365px;
 }
 .snake-container-wrap .snake-container .control-bar #control {
   margin-left: auto;
   margin-right: auto;
+  width: 128px;
+  height: 128px;
   color: #fcf1f1;
   line-height: 128px;
-  margin-bottom: 42px;
-  margin-top: 18px;
+  margin-bottom: 40px;
+  margin-top: 16px;
   display: block;
   padding: 0px;
   border: none;
   outline: none;
   cursor: pointer;
   background-image: url(../images/resources.png);
-  background-position: 0px -359px;
-  width: 128px;
-  height: 128px;
+  background-position: 0px -295px;
+  width: 96px;
+  height: 96px;
   background-color: transparent;
 }
 .snake-container-wrap .snake-container .control-bar #control:active {
   background-image: url(../images/resources.png);
-  background-position: 0px -497px;
-  width: 128px;
-  height: 128px;
+  background-position: 0px -401px;
+  width: 96px;
+  height: 96px;
 }
 .snake-container-wrap .snake-container .control-bar #control.pause {
   background-image: url(../images/resources.png);
   background-position: 0px -83px;
-  width: 128px;
-  height: 128px;
+  width: 96px;
+  height: 96px;
 }
 .snake-container-wrap .snake-container .control-bar #control.pause:active {
   background-image: url(../images/resources.png);
-  background-position: 0px -221px;
-  width: 128px;
-  height: 128px;
+  background-position: 0px -189px;
+  width: 96px;
+  height: 96px;
 }
 .snake-container-wrap .snake-container .control-bar .title-pane {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 120px;
-  padding-left: 12px;
+  padding-left: 16px;
   padding-top: 5px;
 }
 .snake-container-wrap .snake-container .control-bar .title-pane .title {
@@ -155,9 +158,9 @@
   margin: 0px;
   text-align: center;
   text-shadow: 0px 0px 3px #B90401;
-  width: 40px;
-  font-size: 40px;
-  line-height: 40px;
+  width: 32px;
+  font-size: 32px;
+  line-height: 32px;
   padding: 0px 5px;
   color: #fde85b;
 }
@@ -165,8 +168,8 @@
   display: inline-block;
   vertical-align: bottom;
   padding: 22px;
-  width: 634px;
-  height: 634px;
+  width: 500px;
+  height: 500px;
   border-radius: 23px;
   background: #c9231a;
   border: 1px solid #c9231a;
@@ -176,10 +179,12 @@
 .snake-container-wrap .snake-container .content .canvas {
   position: absolute;
   background-image: url(../images/resources.png);
-  background-position: 0px -2284px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+  background-position: 0px -2513px;
   width: 634px;
   height: 634px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+  width: 500px;
+  height: 500px;
 }
 .snake-container-wrap .snake-loading-pane {
   background-repeat: no-repeat;
@@ -231,9 +236,9 @@
   overflow: auto;
   left: 50%;
   top: 0px;
-  width: 996px;
+  width: 800px;
   height: 680px;
-  margin-left: -498px;
+  margin-left: -400px;
   border: 5px solid #e8392a;
   border-radius: 5px;
 }
@@ -269,7 +274,7 @@
   width: 450px;
   height: auto;
   left: 50%;
-  top: 15%;
+  top: 10%;
   margin-left: -225px;
   border: none;
 }
@@ -284,13 +289,13 @@
 }
 .snake-container-wrap .gameover .snake-modal .tip-section .nian-happy {
   background-image: url(../images/resources.png);
-  background-position: 0px -635px;
+  background-position: 0px -507px;
   width: 192px;
   height: 184px;
 }
 .snake-container-wrap .gameover .snake-modal .tip-section .nian-sad {
   background-image: url(../images/resources.png);
-  background-position: 0px -829px;
+  background-position: 0px -701px;
   width: 192px;
   height: 184px;
 }
