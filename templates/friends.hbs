@@ -1,104 +1,22 @@
-<!--分享好友列表-->
-
-<div class="tk-share share-605" id="_friend_xxx" style="display:none;">
-   <div class="tk-cont share-h400 ">
-      <div class="tk-title"><span class="title-word-s">邀请好友来加油</span><div class="close-btn"><a href="javascript:void(-1);"><img src="../images/close.png"></a></div></div>
-      <div class="tk-cont-2 clearfix">
+    <!-- 邀请好友分享 -->
+    <div class="tk-share share-605" id="dialog-invite-game" style="display:none;">
+       <div class="tk-cont share-h400">
+        <div class="tk-title"><span class="title-word-s">邀请好友来加油</span><div class="close-btn"><a href="javascript:;"><img src="images/close.png"></a></div></div>
+        <div class="tk-cont-2 clearfix">
           <div class="tk-fenxiang-title rel">
-              <div class="tk-fenxiang_btn"><a href="javascript:void(-1);" id="friends-share-submit" ><img src="../images/share-btn.png"></a></div>
-              <div class="tk-middle-text">把属于你的代言人形象分享到新浪（腾讯）微博，即得<span>我买网价值18元上质进口牛奶1L装产品兑换券</span>，
-更有机会获得<span>三亚瑞吉酒店港湾房二晚入住</span>（共3份）</div>
-              <div class="tk-right-libao-pic"><img src="../images/tk-share-libao.png"></div>
-              <div class="clear"></div>
-        </div>
-          <div class="tk-huanyi"><a href="#">换一批</a></div>
-          <ul class="tk-photo">
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
-              <li>
-                 <a href="#"><img src="../images/photo-pic.png"></a>
-                 <div class="check"><input name="" type="checkbox" value="" /><span>中粮网</span></div>
-              </li>
+            <div class="tk-fenxiang_btn"><a href="javascript:;" class="friends-share-submit"><img  src="images/tk-share-btn.png"></a></div>
+            <div class="tk-middle-text">分享到微博即得<span id="_prize_content"></span>，
+            还有机会赢取<span>三亚瑞吉酒店港湾房二晚入住</span>
+            (仅剩3个名额)              
+             </div>
+            <div class="tk-right-libao-pic" id="_prize_coupon_18"><img src="images/tk-share-libao.png"></div>
+            <div class="clear"></div>
+          </div>                    
+          <div class="tk-huanyi"><a href="javascript:;" id="dialog-huanyipi-game">换一批</a></div>
+          <span id="_zl_spoke_id" class="spoke_id" style="display:none;"></span>
+          <span id="_zl_invite_page" class="page" style="display:none">1</span>
+          <ul class="tk-photo" id="_dzl_intive_list">
           </ul>     
-            
-      </div>
-   </div>
-</div>
+        </div>
+       </div>
+    </div>

@@ -228,11 +228,6 @@ var api = {
 			$('#over-layout').hide();
 		});
 
-		$('#get-game-friends').click(function() {
-			getGameFriends(1);
-			_alert('dialog-invite-game');
-		});
-
 		$('#dialog-huanyipi-game').click(function() {
 			var page = parseInt($('#_zl_invite_page').html(), 10);
 			var next = page + 1;
@@ -339,7 +334,8 @@ var api = {
 	var friends = [];
 
 	module.share = function(_member_id, _score) {
-		_alert("_friend_xxx");
+		getGameFriends(1);
+		_alert("dialog-invite-game");
 
 		member_id = _member_id;
 		score = _score;
