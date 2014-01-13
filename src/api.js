@@ -4,10 +4,10 @@ var api = {
 	STATUS_ERROR: 'status error',
 	_handle: function(callback) {
 		return function(data) {
-			if(typeof data === 'string') {
+			if (typeof data === 'string') {
 				data = $.parseJSON(data);
 			}
-			
+
 			if (data.status != 1) {
 				return callback(api.STATUS_ERROR);
 			}
@@ -192,7 +192,7 @@ var api = {
 			score: score
 		}, "json")
 			.done(api._handle(callback))
-			.fail(api._onerror(callback));	
+			.fail(api._onerror(callback));
 	}
 };
 
@@ -210,27 +210,122 @@ var api = {
 		$('#over-layout').show();
 	}
 
+	function _showLoader() {
+		$("#_overflow_bg").show("fast", function() {
+			$("#_overflow").show();
+		});
+	}
+
+	function _hideLoader() {
+		$("#_overflow_bg").hide("fast", function() {
+			$("#_overflow").hide();
+		});
+	}
+
 	$(function() {
 		$('.close-btn').click(function() {
 			$('.tk-share').hide();
 			$('#over-layout').hide();
 		});
 
+		$('#get-game-friends').click(function() {
+			getGameFriends(1);
+			_alert('dialog-invite-game');
+		});
+
+		$('#dialog-huanyipi-game').click(function() {
+			var page = parseInt($('#_zl_invite_page').html(), 10);
+			var next = page + 1;
+			$('#_zl_invite_page-game').html(next);
+			getGameFriends(next);
+		});
+
+		function showAlert(msg) {
+			var width = $('#dialog-share-alert').width();
+			var height = $('#dialog-share-alert').height();
+			var left = (browser_width - width) / 2;
+			var top = (browser_height - height) / 3;
+
+			$("#_alert_msg_content").html(msg);
+			$('#dialog-share-alert').css('position', 'fixed').css('top', top).css('left', left).css('z-index', 2001).show();
+			$('#over-layout-alert').show();
+		}
+
+		var $inviteList = $("#_dzl_invite_list");
+
+		function getGameFriends(page) {
+			$.ajax({
+				url: '/game/api/getMemberFriends',
+				type: 'post',
+				async: false,
+				dataType: 'json',
+				data: {
+					'p': page
+				},
+				beforeSend: function(XMLHttpRequest) {
+					_showLoader();
+				},
+				success: function(json) {
+					_hideLoader();
+					if (json.status != 1) {
+						return showAlert(json.info);
+					}
+
+					var info = json.data;
+					//判断下一批（如果没有第一页开始）
+					if (!info.has_next) {
+						$('#_zl_invite_page').html(0);
+					}
+					delete info.has_next;
+					//判断是否显示下一批
+					if (info.just_one == 1) {
+						$('#dialog-huanyipi').hide();
+					}
+					delete info.just_one;
+					for (var i in info) {
+						friend = '<li>';
+						friend += '<a href="javascript:;"><img src="' + info[i].head + '/100"></a>';
+						friend += '<div class="check"><input type="checkbox" class="friend-at" value="' + info[i].name + '" /><span>' + info[i].nick + '</span></div>';
+						friend += '</li>';
+						$('#_dzl_intive_list').append(friend);
+					}
+				}
+			});
+		}
+
 		$("#friends-share-submit").click(function() {
 			var array = [];
+			$inviteList.find("input[type=checkbox]").each(function() {
+				var $this = $(this);
+				if ($this.attr('checked') === 'checked') {
+					array.push($this.val());
+				}
+			});
+
+			if (array.length < 1) {
+				return showAlert("至少选择一个好友");
+			}
+
+			if (array.length > 3) {
+				return showAlert("最多选择三个好友");
+			}
+
 			u.each(friends, function(friend) {
 				array.push("@" + friend);
 			});
 			friendParam = array.join(" ");
 
+			_showLoader();
 			$.post("/game/api/shareToFriends", {
 				member_id: member_id,
 				score: score,
 				friends: friendParam
 			}).done(function(data) {
-				alert(data);
+				_hideLoader();
+				showAlert(data.info);
 			}).fail(function() {
-				alert('error');
+				_hideLoader();
+				showAlert("网络异常");
 			});
 		});
 	});
