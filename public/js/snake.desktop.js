@@ -1196,7 +1196,7 @@ function GameOverPane(el) {
     });
 
     this.$el.find('.share').click(function() {
-        if(self.onShareHandler) {
+        if (self.onShareHandler) {
             self.onShareHandler();
         }
     });
@@ -1215,20 +1215,24 @@ GameOverPane.prototype = {
 
     setScore: function(score) {
         this.$el.find(".score").html(score);
+        var $tips;
+        var $tip_section = this.$el.find(".tip-section .tips");
+        $tip_section.empty();
         if (score >= 50) {
-            this.$el.find(".tip-section .tips").html("<span>你竟然得了</span><br><br>" +
-                "<span class='score'>" + score + "</span><span>分</span><br><br>" +
-                "<span>年兽好满足，</span><br><br>" +
-                "<span>暂时不会再来了！</span>");
+            $tips = $("<p>你竟然得了</p>" +
+                "<p class='score'>" + score + "分</p>" +
+                "<p>年兽好满足，</p>" +
+                "<p>暂时不会再来了！</p>");
             this.$el.find(".nian-mood").removeClass('nian-sad').addClass('nian-happy');
         } else {
-            this.$el.find(".tip-section .tips").html("<span>你才得了</span><br><br>" +
-                "<span class='score'>" + score + "</span><span>分</span><br><br>" +
-                "<span>年兽还没吃饱，</span><br><br>" +
-                "<span>还有可能出没哦！</span><br><br>" +
-                "<span>继续加油吧！</span>");
+            $tips = $("<p>你才得了</p>" +
+                "<p class='score'>" + score + "分</p>" +
+                "<p>年兽还没吃饱，</p>" +
+                "<p>还有可能出没哦！</p>" +
+                "<p>继续加油吧！</p>");
             this.$el.find(".nian-mood").removeClass('nian-happy').addClass('nian-sad');
         }
+        $tips.appendTo($tip_section);
     },
 
     hideGift: function() {
