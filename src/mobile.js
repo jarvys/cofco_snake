@@ -306,8 +306,13 @@ u.extend(Controller.prototype, {
 			self.gameoverPane.hide();
 			api.shareOnMobile(self.user.member_id, self.game.score(), function(err) {
 				if (err) {
-					// TODO
-					return console.error(err);
+					console.error(err);
+					self.$errorModal.show();
+					setTimeout(function() {
+						self.$errorModal.hide();
+						self.$overlay.hide();
+					}, 2000);
+					return;
 				}
 
 				self.$shareModal.show();
