@@ -593,7 +593,7 @@ var api = {
 						friend += '<a href="javascript:;"><img src="' + info[i].head + '/100"></a>';
 						friend += '<div class="check"><input type="checkbox" class="friend-at" value="' + info[i].name + '" /><span>' + info[i].nick + '</span></div>';
 						friend += '</li>';
-						$('#_dzl_intive_list').append(friend);
+						$inviteList.append(friend);
 					}
 				}
 			});
