@@ -186,10 +186,10 @@ var api = {
 		);
 	},
 
-	shareOnMobile: function(member_id, score, callback) {
+	shareOnMobile: function(score, callback) {
 		$.post("/game/api/shareM", {
-			member_id: member_id,
-			score: score
+			score: score,
+			has_win_prize_chance: 1
 		}, "json")
 			.done(api._handle(callback))
 			.fail(api._onerror(callback));
