@@ -235,15 +235,18 @@ var api = {
 			getGameFriends(next);
 		});
 
+		var $alert = $("#dialog-share-alert");
+		$alert.find(".close-btn-alert").click(function() {
+			$alert.hide();
+		});
 		function showAlert(msg) {
 			var width = $('#dialog-share-alert').width();
 			var height = $('#dialog-share-alert').height();
 			var left = (browser_width - width) / 2;
 			var top = (browser_height - height) / 3;
 
-			$("#_alert_msg_content").html(msg);
-			$('#dialog-share-alert').css('position', 'fixed').css('top', top).css('left', left).css('z-index', 2001).show();
-			$('#over-layout-alert').show();
+			$alert.find("#_alert_msg_content").html(msg);
+			$alert.css('position', 'fixed').css('top', top).css('left', left).css('z-index', 2001).show();
 		}
 
 		var $invite = $("#dialog-invite-game");
