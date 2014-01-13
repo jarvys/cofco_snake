@@ -6,7 +6,7 @@ var loader = {
 	canvasImage: null,
 	canvasSprites: null,
 	user: null,
-	prefix: 'Public/game',
+	prefix: '/Public/game',
 
 	loadGameSpriteImages: function(callback) {
 		var images = [
