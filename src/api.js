@@ -246,6 +246,7 @@ var api = {
 			$('#over-layout-alert').show();
 		}
 
+		var $invite = $("#dialog-invite-game");
 		var $inviteList = $("#_dzl_invite_list");
 
 		function getGameFriends(page) {
@@ -288,7 +289,7 @@ var api = {
 			});
 		}
 
-		$("#friends-share-submit").click(function() {
+		$invite.find(".friends-share-submit").click(function() {
 			var array = [];
 			$inviteList.find("input[type=checkbox]").each(function() {
 				var $this = $(this);
