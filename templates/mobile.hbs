@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>snake demo</title>
     {{#if DEBUG}}
-    <link rel="stylesheet" href="css/snake.mobile.css" type="text/css">
+    <link rel="stylesheet" href="Public/game/css/snake.mobile.css" type="text/css">
     {{else}}
-    <link rel="stylesheet" href="css/snake.mobile.min.css" type="text/css">
+    <link rel="stylesheet" href="Public/game/css/snake.mobile.min.css" type="text/css">
     {{/if}}
 </head>
 <body style="margin: 0px;">
@@ -65,7 +65,7 @@
                     <p>继续加油吧</p>
                 </div>
                 <div class="gift hide">
-                    <img src="images/redbag.png" width="50" height="50"> 
+                    <img src="Public/game/images/redbag.png" width="50" height="50"> 
                     <p>
                         <span>获得50元我买网红包的同时</span><br>
                         <span>会分享您的本局成绩哦</span>
@@ -81,15 +81,17 @@
 
     <p style="text-align: center;width: 100%; height: 300px;line-height: 300px;color: #b20">网页其他内容</p>
 
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.hammer.min.js">
+    <script type="text/javascript" src="Public/game/js/jquery.min.js">
     </script>
-    <script type="text/javascript" src="js/async.js"></script>
+    <script type="text/javascript" src="Public/game/js/jquery.hammer.min.js">
+    </script>
+    <script type="text/javascript" src="Public/game/js/async.js"></script>
 
     {{#if DEBUG}}
-    <script type="text/javascript" src="js/snake.mobile.js"></script>
+    <script type="text/javascript" src="Public/game/js/snake.mobile.js">
+    </script>
     {{else}}
-    <script type="text/javascript" src="js/snake.mobile.min.js">
+    <script type="text/javascript" src="Public/game/js/snake.mobile.min.js">
     </script>
     {{/if}}
 </body>

@@ -33,7 +33,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
         async: 'bower_components/async/lib/async.js',
-        static_dir: 'public',
+        static_dir: 'dist/Public/game',
 
         sprite: {
             resources: {
@@ -137,10 +137,7 @@ module.exports = function(grunt) {
                 dest: '<%= static_dir %>/js/<%= pkg.name %>.mobile.min.js',
             }
         },
-        qunit: {
-            files: ['test/**/*.html'],
-        },
-
+        
         jshint: {
             src: [
                 'Gruntfile.js',
@@ -209,7 +206,7 @@ module.exports = function(grunt) {
                     DEBUG: true,
                     FEEDBACK: false
                 });
-                var to = "public/" + item + ".html";
+                var to = "dist/" + item + ".html";
                 fs.writeFile(to, html, function(err) {
                     if (err) {
                         return callback(err);

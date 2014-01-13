@@ -29,9 +29,8 @@ registerTempltes(handlebars, function(err) {
 function startServer() {
 	var app = express();
 	app.use(express.logger('dev'));
-	app.use(express.static(__dirname + '/public'));
+	app.use(express.static(__dirname + '/dist'));
 	app.use(useragent.express());
-	app.use("/libs", express.static(__dirname + '/bower_components'));
 	app.use(express.bodyParser());
 
 	app.post('/game/api/shareToFriends', function(req, res) {

@@ -31,15 +31,8 @@
 			}
 		}
 
-		@media screen and (max-width: 380px) {
-			.info.rank {
-				display: none;
-			}
-		}
-
 		button.control {
 			.button-size(0px; 5px; 12px; 14px; 0px);
-			.sprite(@bt_play_normal);
 			background-color: transparent;
 			border: none;
 			cursor: pointer;
@@ -48,17 +41,57 @@
 			float: right;
 		}
 
-		button.control:active {
-			.sprite(@bt_play_normal);
+		@media screen and (max-width: 380px) {
+			.info.rank {
+				display: none;
+			}
 		}
 
-		button.control.pause {
-			.sprite(@bt_pause_normal);
+		@media screen and (min-width: 650px) {
+			.info {
+				float: left;
+				span {
+					float: left;
+				}
+			}
+
+			button.control {
+				.sprite(@bt_play_normal_small);
+			}
+
+			button.control:active {
+				.sprite(@bt_play_pressed_small);
+			}
+
+			button.control.pause {
+				.sprite(@bt_pause_normal_small);
+			}
+
+			button.control.pause:active {
+				.sprite(@bt_pause_pressed_small);
+			}
 		}
 
-		button.control.pause:active {
-			.sprite(@bt_pause_pressed);
+		@media screen and (max-width: 650px) {
+
+			button.control {
+				.sprite(@bt_play_normal);
+				
+			}
+
+			button.control:active {
+				.sprite(@bt_play_pressed);
+			}
+
+			button.control.pause {
+				.sprite(@bt_pause_normal);
+			}
+
+			button.control.pause:active {
+				.sprite(@bt_pause_pressed);
+			}
 		}
+
 	}
 
 	.content {

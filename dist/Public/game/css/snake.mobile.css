@@ -50,20 +50,11 @@
   display: block;
   width: 75px;
 }
-@media screen and (max-width: 380px) {
-  .snake-container-wrap .header .info.rank {
-    display: none;
-  }
-}
 .snake-container-wrap .header button.control {
   padding: 0px 5px;
   font-size: 12px;
   line-height: 14px;
   border-radius: 0px;
-  background-image: url(../images/mobile.png);
-  background-position: 0px -130px;
-  width: 55px;
-  height: 55px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -71,23 +62,68 @@
   display: block;
   float: right;
 }
-.snake-container-wrap .header button.control:active {
-  background-image: url(../images/mobile.png);
-  background-position: 0px -130px;
-  width: 55px;
-  height: 55px;
+@media screen and (max-width: 380px) {
+  .snake-container-wrap .header .info.rank {
+    display: none;
+  }
 }
-.snake-container-wrap .header button.control.pause {
-  background-image: url(../images/mobile.png);
-  background-position: 0px 0px;
-  width: 55px;
-  height: 55px;
+@media screen and (min-width: 650px) {
+  .snake-container-wrap .header .info {
+    float: left;
+  }
+  .snake-container-wrap .header .info span {
+    float: left;
+  }
+  .snake-container-wrap .header button.control {
+    background-image: url(../images/mobile.png);
+    background-position: 0px -70px;
+    width: 25px;
+    height: 25px;
+  }
+  .snake-container-wrap .header button.control:active {
+    background-image: url(../images/mobile.png);
+    background-position: 0px -105px;
+    width: 25px;
+    height: 25px;
+  }
+  .snake-container-wrap .header button.control.pause {
+    background-image: url(../images/mobile.png);
+    background-position: 0px 0px;
+    width: 25px;
+    height: 25px;
+  }
+  .snake-container-wrap .header button.control.pause:active {
+    background-image: url(../images/mobile.png);
+    background-position: 0px -35px;
+    width: 25px;
+    height: 25px;
+  }
 }
-.snake-container-wrap .header button.control.pause:active {
-  background-image: url(../images/mobile.png);
-  background-position: 0px -65px;
-  width: 55px;
-  height: 55px;
+@media screen and (max-width: 650px) {
+  .snake-container-wrap .header button.control {
+    background-image: url(../images/mobile.png);
+    background-position: 0px -270px;
+    width: 55px;
+    height: 55px;
+  }
+  .snake-container-wrap .header button.control:active {
+    background-image: url(../images/mobile.png);
+    background-position: 0px -335px;
+    width: 55px;
+    height: 55px;
+  }
+  .snake-container-wrap .header button.control.pause {
+    background-image: url(../images/mobile.png);
+    background-position: 0px -140px;
+    width: 55px;
+    height: 55px;
+  }
+  .snake-container-wrap .header button.control.pause:active {
+    background-image: url(../images/mobile.png);
+    background-position: 0px -205px;
+    width: 55px;
+    height: 55px;
+  }
 }
 .snake-container-wrap .content {
   padding-bottom: 10px;

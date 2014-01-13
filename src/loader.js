@@ -6,9 +6,15 @@ var loader = {
 	canvasImage: null,
 	canvasSprites: null,
 	user: null,
+	prefix: 'Public/game',
 
 	loadGameSpriteImages: function(callback) {
-		var images = ["images/snake.png", "images/foods.png", "images/canvas.png"];
+		var images = [
+			"images/snake.png",
+			"images/foods.png",
+			"images/canvas.png"
+		];
+
 		async.each(images, function(item, cb) {
 			var image = new Image();
 			image.onload = function() {
@@ -30,7 +36,7 @@ var loader = {
 				cb("fail to load sprite image " + item);
 			};
 
-			image.src = item;
+			image.src = loader.prefix + "/" + item;
 		}, function(err, results) {
 			if (err) {
 				return callback(err);
@@ -41,8 +47,13 @@ var loader = {
 	},
 
 	loadGameSpriteMeta: function(callback) {
-		async.each(["json/snake.json", "json/foods.json", "json/canvas.json"], function(item, cb) {
-			$.get(item, "json").success(function(sprites) {
+		async.each([
+			"json/snake.json",
+			"json/foods.json",
+			"json/canvas.json"
+		], function(item, cb) {
+			var path = loader.prefix + "/" + item;
+			$.get(path, "json").success(function(sprites) {
 				switch (item) {
 					case "json/snake.json":
 						loader.snakeSprites = sprites;
@@ -87,6 +98,6 @@ var loader = {
 			callback('fail to load image:' + src);
 		};
 
-		image.src = "images/resources.png";
+		image.src = loader.prefix + "/images/resources.png";
 	}
 };
