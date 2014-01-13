@@ -4,6 +4,10 @@ var api = {
 	STATUS_ERROR: 'status error',
 	_handle: function(callback) {
 		return function(data) {
+			if(typeof data === 'string') {
+				data = $.parseJSON(data);
+			}
+			
 			if (data.status != 1) {
 				return callback(api.STATUS_ERROR);
 			}
