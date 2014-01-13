@@ -247,3 +247,16 @@
   outline: none;
   border: none;
 }
+.snake-container-wrap .error-modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100px;
+  height: 50px;
+  margin-left: -50px;
+  margin-top: -25px;
+  border: 3px solid #e8392a;
+  border-radius: 3px;
+  background-color: #fff;
+  text-align: center;
+}

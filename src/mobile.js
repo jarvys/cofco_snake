@@ -1,19 +1,19 @@
 var DIRECTION_KEYCODES = {
-    up: [38, 75, 87],
-    down: [40, 74, 83],
-    left: [37, 65, 72],
-    right: [39, 68, 76],
+	up: [38, 75, 87],
+	down: [40, 74, 83],
+	left: [37, 65, 72],
+	right: [39, 68, 76],
 };
 
 function getDirectionByKeyCode(keyCode) {
-    for (var key in DIRECTION_KEYCODES) {
-        var codelist = DIRECTION_KEYCODES[key];
-        if (~u.indexOf(codelist, keyCode)) {
-            return key;
-        }
-    }
+	for (var key in DIRECTION_KEYCODES) {
+		var codelist = DIRECTION_KEYCODES[key];
+		if (~u.indexOf(codelist, keyCode)) {
+			return key;
+		}
+	}
 
-    return null;
+	return null;
 }
 
 function BackgroundLayer() {
@@ -117,10 +117,10 @@ _Controller = {
 		}
 
 		$(document).on("keydown", while_playing(function(e) {
-            e.preventDefault();
-            var direction = getDirectionByKeyCode(e.keyCode);
-            if (direction) self.game.changeSnakeDirection(direction);
-        }));
+			e.preventDefault();
+			var direction = getDirectionByKeyCode(e.keyCode);
+			if (direction) self.game.changeSnakeDirection(direction);
+		}));
 
 		var hammer = $(document).hammer();
 		hammer.on('touchmove', while_playing(function(e) {
@@ -145,15 +145,13 @@ _Controller = {
 	},
 
 	onUploadScoreFailed: function() {
-		console.error('failed to upload score');
-		/*
 		var self = this;
-		this.errorPane.show();
+
+		this.$errorModal.show();
 		setTimeout(function() {
-			self.errorPane.hide();
+			self.$errorModal.hide();
 			self.$overlay.hide();
-		}, 2 * 1000);
-		*/
+		}, 2000);
 	},
 
 	onScoreUploaded: function(user) {
@@ -187,7 +185,7 @@ _Controller = {
 
 		this.$overlay.show();
 		api.sync_score_on_mobile(this.user.member_id, this.game.score(),
-			//u.delay(5 * 1000,
+			//u.delay(15 * 1000,
 			u.timeup(10 * 1000,
 				_hide(function(err, data) {
 					if (err) {
@@ -279,11 +277,13 @@ u.extend(Controller.prototype, {
 
 		if (!user) {
 			this.$startModal.on('click', 'button', function() {
-				// 跳转的指定的登录页面
+				// TODO 跳转的指定的登录页面
 				window.location = "";
 			});
 			return;
 		}
+
+		this.$errorModal = this.$el.find(".error-modal");
 
 		this.$shareModal = this.$el.find(".share-modal");
 		this.$shareModal.find("button").click(function() {
@@ -301,7 +301,7 @@ u.extend(Controller.prototype, {
 		this.gameoverPane.onShare(function() {
 			self.gameoverPane.hide();
 			api.shareOnMobile(self.user.member_id, self.game.score(), function(err) {
-				if(err) {
+				if (err) {
 					// TODO
 					return console.error(err);
 				}
