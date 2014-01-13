@@ -8,3 +8,5 @@ var requestAnimationFrame = window.requestAnimationFrame ||
 	window.webkitRequestAnimationFrame ||
 	window.mozRequestAnimationFrame ||
 	_nextTick;
+
+console.log(requestAnimationFrame);

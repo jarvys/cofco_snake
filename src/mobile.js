@@ -106,7 +106,7 @@ _Controller = {
 
 		function while_playing(func) {
 			return function() {
-				if (self.game.status !== Game.PLAYING) {
+				if (!self.game || self.game.status !== Game.PLAYING) {
 					return;
 				}
 
