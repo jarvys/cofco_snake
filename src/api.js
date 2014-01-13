@@ -20,36 +20,36 @@ var api = {
 
 	addScore: function(params, callback) {
 		$.post('/game/api/addScore', params, "json")
-			.success(api._handle(callback))
-			.error(api._onerror(callback));
+			.done(api._handle(callback))
+			.fail(api._onerror(callback));
 	},
 
 	getTotalScore: function(member_id, callback) {
 		$.post('/game/api/getTotalScore', {
 			member_id: member_id
 		}, "json")
-			.success(api._handle(callback))
-			.error(api._onerror(callback));
+			.done(api._handle(callback))
+			.fail(api._onerror(callback));
 	},
 
 	getUserinfo: function(callback) {
 		$.post('/game/api/getMemberInfo', {}, "json")
-			.success(api._handle(callback))
-			.error(api._onerror(callback));
+			.done(api._handle(callback))
+			.fail(api._onerror(callback));
 	},
 
 	addScoreForMobile: function(params, callback) {
 		$.post('/game/api/addScoreForMobile', params, "json")
-			.success(api._handle(callback))
-			.error(api._onerror(callback));
+			.done(api._handle(callback))
+			.fail(api._onerror(callback));
 	},
 
 	getRank: function(member_id, callback) {
 		$.post('/game/api/getScoreRank', {
 			member_id: member_id
 		}, "json")
-			.success(api._handle(callback))
-			.error(api._onerror(callback));
+			.done(api._handle(callback))
+			.fail(api._onerror(callback));
 	},
 
 	// 获取用户信息：获取用户信息-->获取用户排名
@@ -187,8 +187,8 @@ var api = {
 			member_id: member_id,
 			score: score
 		}, "json")
-			.success(api._handle(callback))
-			.error(api._onerror(callback));	
+			.done(api._handle(callback))
+			.fail(api._onerror(callback));	
 	}
 };
 
@@ -223,9 +223,9 @@ var api = {
 				member_id: member_id,
 				score: score,
 				friends: friendParam
-			}).success(function(data) {
+			}).done(function(data) {
 				alert(data);
-			}).error(function() {
+			}).fail(function() {
 				alert('error');
 			});
 		});
