@@ -159,7 +159,7 @@ _Controller = {
 		this.gameoverPane.show();
 		this.$totalScore.html(user.score);
 		_Controller.showInfo.call(this);
-		if (this.user.winPrize) {
+		if (this.user.has_chance_win_prize) {
 			this.gameoverPane.showGift();
 		}
 		this.gameoverPane.setScore(this.game.score());
@@ -278,9 +278,9 @@ u.extend(Controller.prototype, {
 		this.render.draw();
 
 		this.$startModal = this.$el.find(".start-modal");
+		this.$startModal.show();
 
 		if (!user) {
-			this.$startModal.show();
 			this.$startModal.on('click', 'button', function() {
 				// TODO 跳转的指定的登录页面
 				window.location = "";
@@ -291,7 +291,7 @@ u.extend(Controller.prototype, {
 		this.$errorModal = this.$el.find(".error-modal");
 
 		this.$shareModal = this.$el.find(".share-modal");
-		this.$shareModal.find("button").click(function() {
+		this.$shareModal.on('click', "button", function() {
 			self.$shareModal.hide();
 			self.$overlay.hide();
 			_Controller.startGame.call(self);
@@ -305,9 +305,8 @@ u.extend(Controller.prototype, {
 		});
 		this.gameoverPane.onShare(function() {
 			self.gameoverPane.hide();
-			api.shareOnMobile(self.user.member_id, self.game.score(), function(err) {
+			api.shareOnMobile(self.user.member_id, self.game.score(), function(err, data) {
 				if (err) {
-					console.error(err);
 					self.$errorModal.show();
 					setTimeout(function() {
 						self.$errorModal.hide();
@@ -316,6 +315,16 @@ u.extend(Controller.prototype, {
 					return;
 				}
 
+				if (data.winPrize) {
+					self.$shareModal.html("<p>恭喜您！</p>" +
+						"<p>已获得50元我买网红包</p>" +
+						'<p style="margin-bottom: 20px">继续冲击贪吃大奖吧！</p>' +
+						'<button>再来一局</button>');
+				} else {
+					self.$shareModal.html('<p style="margin: 10px 0px">分享成功</p>' +
+						'<p style="margin-bottom: 20px">继续冲击贪吃大奖吧！</p>' +
+						'<button>再来一局</button>');
+				}
 				self.$shareModal.show();
 			});
 		});

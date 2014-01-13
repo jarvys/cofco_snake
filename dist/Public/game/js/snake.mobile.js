@@ -350,7 +350,7 @@ var api = {
 	},
 
 	addScoreForMobile: function(params, callback) {
-		$.post('/game/api/addScoreForMobile', params, "json")
+		$.post('/game/api/addScoreM', params, "json")
 			.done(api._handle(callback))
 			.fail(api._onerror(callback));
 	},
@@ -408,17 +408,17 @@ var api = {
 					return callback(err);
 				}
 
-				callback(null, data.winPrize);
+				callback(null, data.has_chance_win_prize);
 			});
 		}
 
-		function _getUserInfo(winPrize, callback) {
+		function _getUserInfo(has_chance_win_prize, callback) {
 			api.getUserinfo(function(err, user) {
 				if (err) {
 					return callback(err);
 				}
 
-				user.winPrize = winPrize;
+				user.has_chance_win_prize = has_chance_win_prize;
 				callback(null, user);
 			});
 		}
@@ -494,7 +494,7 @@ var api = {
 	},
 
 	shareOnMobile: function(member_id, score, callback) {
-		$.post("/game/api/share", {
+		$.post("/game/api/shareM", {
 			member_id: member_id,
 			score: score
 		}, "json")
@@ -528,6 +528,8 @@ var api = {
 			$("#_overflow").hide();
 		});
 	}
+
+	var _getGameFriends = null;
 
 	$(function() {
 		$('.close-btn').click(function() {
@@ -588,34 +590,35 @@ var api = {
 						$('#dialog-huanyipi').hide();
 					}
 					delete info.just_one;
+					$inviteList.empty();
 					for (var i in info) {
 						friend = '<li>';
 						friend += '<a href="javascript:;"><img src="' + info[i].head + '/100"></a>';
 						friend += '<div class="check"><input type="checkbox" class="friend-at" value="' + info[i].name + '" /><span>' + info[i].nick + '</span></div>';
 						friend += '</li>';
-						$('#_dzl_intive_list').append(friend);
+						$inviteList.append(friend);
 					}
 				}
 			});
 		}
 
+		_getGameFriends = getGameFriends;
+
 		$invite.find(".friends-share-submit").click(function() {
-			var array = [];
-			$inviteList.find("input[type=checkbox]").each(function() {
-				var $this = $(this);
-				if ($this.attr('checked') === 'checked') {
-					array.push($this.val());
-				}
+			var friends = [];
+			$inviteList.find("input[type=checkbox]:checked").each(function() {
+				friends.push($(this).val());
 			});
 
-			if (array.length < 1) {
+			if (friends.length < 1) {
 				return showAlert("至少选择一个好友");
 			}
 
-			if (array.length > 3) {
+			if (friends.length > 3) {
 				return showAlert("最多选择三个好友");
 			}
 
+			var array = [];
 			u.each(friends, function(friend) {
 				array.push("@" + friend);
 			});
@@ -628,6 +631,9 @@ var api = {
 				friends: friendParam
 			}).done(function(data) {
 				_hideLoader();
+				if(typeof data === 'string') {
+					data = $.parseJSON(data);
+				}
 				showAlert(data.info);
 			}).fail(function() {
 				_hideLoader();
@@ -645,7 +651,7 @@ var api = {
 	var friends = [];
 
 	module.share = function(_member_id, _score) {
-		getGameFriends(1);
+		_getGameFriends(1);
 		_alert("dialog-invite-game");
 
 		member_id = _member_id;
@@ -1425,7 +1431,7 @@ _Controller = {
 		this.gameoverPane.show();
 		this.$totalScore.html(user.score);
 		_Controller.showInfo.call(this);
-		if (this.user.winPrize) {
+		if (this.user.has_chance_win_prize) {
 			this.gameoverPane.showGift();
 		}
 		this.gameoverPane.setScore(this.game.score());
@@ -1544,9 +1550,9 @@ u.extend(Controller.prototype, {
 		this.render.draw();
 
 		this.$startModal = this.$el.find(".start-modal");
+		this.$startModal.show();
 
 		if (!user) {
-			this.$startModal.show();
 			this.$startModal.on('click', 'button', function() {
 				// TODO 跳转的指定的登录页面
 				window.location = "";
@@ -1557,7 +1563,7 @@ u.extend(Controller.prototype, {
 		this.$errorModal = this.$el.find(".error-modal");
 
 		this.$shareModal = this.$el.find(".share-modal");
-		this.$shareModal.find("button").click(function() {
+		this.$shareModal.on('click', "button", function() {
 			self.$shareModal.hide();
 			self.$overlay.hide();
 			_Controller.startGame.call(self);
@@ -1571,9 +1577,8 @@ u.extend(Controller.prototype, {
 		});
 		this.gameoverPane.onShare(function() {
 			self.gameoverPane.hide();
-			api.shareOnMobile(self.user.member_id, self.game.score(), function(err) {
+			api.shareOnMobile(self.user.member_id, self.game.score(), function(err, data) {
 				if (err) {
-					console.error(err);
 					self.$errorModal.show();
 					setTimeout(function() {
 						self.$errorModal.hide();
@@ -1582,6 +1587,16 @@ u.extend(Controller.prototype, {
 					return;
 				}
 
+				if (data.winPrize) {
+					self.$shareModal.html("<p>恭喜您！</p>" +
+						"<p>已获得50元我买网红包</p>" +
+						'<p style="margin-bottom: 20px">继续冲击贪吃大奖吧！</p>' +
+						'<button>再来一局</button>');
+				} else {
+					self.$shareModal.html('<p style="margin: 10px 0px">分享成功</p>' +
+						'<p style="margin-bottom: 20px">继续冲击贪吃大奖吧！</p>' +
+						'<button>再来一局</button>');
+				}
 				self.$shareModal.show();
 			});
 		});

@@ -74,7 +74,24 @@ function startServer() {
 	};
 
 	app.post('/game/api/addScore', addScore);
-	app.post('/game/api/addScoreForMobile', addScore);
+	app.post('/game/api/addScoreM', function(req, res) {
+		var score = parseInt(req.param("score"), 10);
+		var member_id = parseInt(req.param("member_id"), 10);
+
+		user.score += score;
+		if (score > 0) {
+			user.today_rank = Math.max(0, --user.today_rank);
+			user.total_rank = Math.max(0, --user.total_rank);
+		}
+
+		res.send({
+			status: 1,
+			info: '',
+			data: {
+				has_chance_win_prize: score >= 50
+			}
+		});
+	});
 
 	app.post('/game/api/getTotalScore', function(req, res) {
 		var member_id = parseInt(req.param("member_id"), 10);
@@ -86,9 +103,12 @@ function startServer() {
 		});
 	});
 
-	app.post('/game/api/share', function(req, res) {
+	app.post('/game/api/shareM', function(req, res) {
 		res.send({
-			status: 1
+			status: 1,
+			data: {
+				winPrize: true
+			}
 		});
 	});
 

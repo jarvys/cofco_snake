@@ -350,7 +350,7 @@ var api = {
 	},
 
 	addScoreForMobile: function(params, callback) {
-		$.post('/game/api/addScoreForMobile', params, "json")
+		$.post('/game/api/addScoreM', params, "json")
 			.done(api._handle(callback))
 			.fail(api._onerror(callback));
 	},
@@ -408,17 +408,17 @@ var api = {
 					return callback(err);
 				}
 
-				callback(null, data.winPrize);
+				callback(null, data.has_chance_win_prize);
 			});
 		}
 
-		function _getUserInfo(winPrize, callback) {
+		function _getUserInfo(has_chance_win_prize, callback) {
 			api.getUserinfo(function(err, user) {
 				if (err) {
 					return callback(err);
 				}
 
-				user.winPrize = winPrize;
+				user.has_chance_win_prize = has_chance_win_prize;
 				callback(null, user);
 			});
 		}
@@ -494,7 +494,7 @@ var api = {
 	},
 
 	shareOnMobile: function(member_id, score, callback) {
-		$.post("/game/api/share", {
+		$.post("/game/api/shareM", {
 			member_id: member_id,
 			score: score
 		}, "json")
@@ -528,6 +528,8 @@ var api = {
 			$("#_overflow").hide();
 		});
 	}
+
+	var _getGameFriends = null;
 
 	$(function() {
 		$('.close-btn').click(function() {
@@ -588,6 +590,7 @@ var api = {
 						$('#dialog-huanyipi').hide();
 					}
 					delete info.just_one;
+					$inviteList.empty();
 					for (var i in info) {
 						friend = '<li>';
 						friend += '<a href="javascript:;"><img src="' + info[i].head + '/100"></a>';
@@ -599,23 +602,23 @@ var api = {
 			});
 		}
 
+		_getGameFriends = getGameFriends;
+
 		$invite.find(".friends-share-submit").click(function() {
-			var array = [];
-			$inviteList.find("input[type=checkbox]").each(function() {
-				var $this = $(this);
-				if ($this.attr('checked') === 'checked') {
-					array.push($this.val());
-				}
+			var friends = [];
+			$inviteList.find("input[type=checkbox]:checked").each(function() {
+				friends.push($(this).val());
 			});
 
-			if (array.length < 1) {
+			if (friends.length < 1) {
 				return showAlert("至少选择一个好友");
 			}
 
-			if (array.length > 3) {
+			if (friends.length > 3) {
 				return showAlert("最多选择三个好友");
 			}
 
+			var array = [];
 			u.each(friends, function(friend) {
 				array.push("@" + friend);
 			});
@@ -628,6 +631,9 @@ var api = {
 				friends: friendParam
 			}).done(function(data) {
 				_hideLoader();
+				if(typeof data === 'string') {
+					data = $.parseJSON(data);
+				}
 				showAlert(data.info);
 			}).fail(function() {
 				_hideLoader();
@@ -645,7 +651,7 @@ var api = {
 	var friends = [];
 
 	module.share = function(_member_id, _score) {
-		getGameFriends(1);
+		_getGameFriends(1);
 		_alert("dialog-invite-game");
 
 		member_id = _member_id;
