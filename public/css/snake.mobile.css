@@ -89,15 +89,161 @@
   width: 55px;
   height: 55px;
 }
+.snake-container-wrap .content {
+  padding-bottom: 10px;
+}
 .snake-container-wrap .content canvas {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-.snake-container-wrap .snake-loading-pane {
+.snake-container-wrap .snake-modal-overlay {
   position: absolute;
   left: 0px;
   top: 0px;
   right: 0px;
   bottom: 0px;
+  background-color: #fff;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+.snake-container-wrap .start-modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 180px;
+  height: 64px;
+  margin-left: -90px;
+  margin-top: -32px;
+  border: 3px solid #e8392a;
+  border-radius: 3px;
+  border: none;
+  background-color: transparent;
+}
+.snake-container-wrap .start-modal button {
+  font-family: "jianzhi", "微软雅黑";
+  font-weight: normal;
+  color: #fff;
+  text-align: center;
+  background-color: #e8392a;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  display: block;
+  width: 100%;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 10px 20px;
+  border-radius: 24px;
+}
+.snake-container-wrap .start-modal button:active {
+  outline: none;
+  border: none;
+}
+.snake-container-wrap .share-modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 280px;
+  height: 170px;
+  margin-left: -140px;
+  margin-top: -85px;
+  border: 3px solid #e8392a;
+  border-radius: 3px;
+  background-color: #fff;
+  text-align: center;
+}
+.snake-container-wrap .share-modal p {
+  text-align: center;
+  color: #e8392a;
+  margin: 0px;
+  line-height: 36px;
+  font-size: 18px;
+}
+.snake-container-wrap .share-modal button {
+  font-family: "jianzhi", "微软雅黑";
+  font-weight: normal;
+  color: #fff;
+  text-align: center;
+  background-color: #e8392a;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  line-height: 18px;
+  padding: 5px 12px;
+  border-radius: 14px;
+}
+.snake-container-wrap .share-modal button:active {
+  outline: none;
+  border: none;
+}
+.snake-container-wrap .gameover-modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  height: 270px;
+  margin-left: -150px;
+  margin-top: -135px;
+  border: 3px solid #e8392a;
+  border-radius: 3px;
+  background-color: transparent;
+  border: none;
+}
+.snake-container-wrap .gameover-modal .modal-inner {
+  background-color: #fff;
+  padding: 10px 0px;
+  border: 3px solid #e8392a;
+  border-radius: 3px;
+}
+.snake-container-wrap .gameover-modal .modal-inner .tips p {
+  text-align: center;
+  color: #e8392a;
+  margin: 0px;
+  line-height: 36px;
+  font-size: 18px;
+}
+.snake-container-wrap .gameover-modal .modal-inner .tips p span.score {
+  font-size: 36px;
+}
+.snake-container-wrap .gameover-modal .modal-inner .gift {
+  text-align: center;
+  padding: 10px 0px;
+}
+.snake-container-wrap .gameover-modal .modal-inner .gift img,
+.snake-container-wrap .gameover-modal .modal-inner .gift p {
+  display: inline-block;
+  vertical-align: top;
+}
+.snake-container-wrap .gameover-modal .modal-inner .gift p {
+  margin: 0px;
+}
+.snake-container-wrap .gameover-modal .modal-inner .gift p span {
+  font-family: "微软雅黑";
+  margin: 0px;
+  font-size: 14px;
+  line-height: 14px;
+  padding: 5px 0px;
+}
+.snake-container-wrap .gameover-modal .modal-inner .btns {
+  text-align: center;
+}
+.snake-container-wrap .gameover-modal .modal-inner .btns button {
+  font-family: "jianzhi", "微软雅黑";
+  font-weight: normal;
+  color: #fff;
+  text-align: center;
+  background-color: #e8392a;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  line-height: 14px;
+  padding: 5px 12px;
+  border-radius: 13px;
+}
+.snake-container-wrap .gameover-modal .modal-inner .btns button:active {
+  outline: none;
+  border: none;
 }

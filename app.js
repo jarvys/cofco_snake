@@ -55,7 +55,7 @@ function startServer() {
 		});
 	});
 
-	app.post('/game/api/addScore', function(req, res) {
+	var addScore = function(req, res) {
 		var score = parseInt(req.param("score"), 10);
 		var member_id = parseInt(req.param("member_id"), 10);
 
@@ -72,7 +72,10 @@ function startServer() {
 				winPrize: score >= 50
 			}
 		});
-	});
+	};
+
+	app.post('/game/api/addScore', addScore);
+	app.post('/game/api/addScoreForMobile', addScore);
 
 	app.post('/game/api/getTotalScore', function(req, res) {
 		var member_id = parseInt(req.param("member_id"), 10);
@@ -81,6 +84,12 @@ function startServer() {
 			status: 1,
 			info: '',
 			data: user
+		});
+	});
+
+	app.post('/game/api/share', function(req, res) {
+		res.send({
+			status: 1
 		});
 	});
 

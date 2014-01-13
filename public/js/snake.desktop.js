@@ -343,6 +343,12 @@ var api = {
 			.error(api._onerror(callback));
 	},
 
+	addScoreForMobile: function(params, callback) {
+		$.post('/game/api/addScoreForMobile', params, "json")
+			.success(api._handle(callback))
+			.error(api._onerror(callback));
+	},
+
 	getRank: function(member_id, callback) {
 		$.post('/game/api/getScoreRank', {
 			member_id: member_id
@@ -381,6 +387,53 @@ var api = {
 
 				callback(null, user);
 				// callback(null, null);
+			}
+			//)
+		);
+	},
+
+	sync_score_on_mobile: function(member_id, score, callback) {
+		function _addScore(callback) {
+			api.addScoreForMobile({
+				member_id: member_id,
+				score: score
+			}, function(err, data) {
+				if (err) {
+					return callback(err);
+				}
+
+				callback(null, data.winPrize);
+			});
+		}
+
+		function _getUserInfo(winPrize, callback) {
+			api.getUserinfo(function(err, user) {
+				if (err) {
+					return callback(err);
+				}
+
+				user.winPrize = winPrize;
+				callback(null, user);
+			});
+		}
+
+		function _getRank(user, callback) {
+			api.getRank(member_id, function(err, rank) {
+				if (!err) {
+					u.extend(user, rank);
+				}
+				callback(null, user);
+			});
+		}
+
+		async.waterfall([_addScore, _getUserInfo, _getRank],
+			//u.delay(5 * 1000,
+			function(err, user) {
+				if (err) {
+					return callback(err);
+				}
+
+				callback(null, user);
 			}
 			//)
 		);
@@ -432,6 +485,15 @@ var api = {
 			}
 			//)
 		);
+	},
+
+	shareOnMobile: function(member_id, score, callback) {
+		$.post("/game/api/share", {
+			member_id: member_id,
+			score: score
+		}, "json")
+			.success(api._handle(callback))
+			.error(api._onerror(callback));	
 	}
 };
 

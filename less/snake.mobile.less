@@ -65,14 +65,144 @@
 		canvas {
 			.center-block();
 		}	
+
+		padding-bottom: 10px;
 	}
 
-	.snake-loading-pane {
-		position: absolute;	
+	.snake-btn() {
+		&:active {
+			outline: none;
+			border: none;
+		}
+
+		.jianzhi();
+		color: #fff;
+		text-align: center;
+		background-color: #e8392a;
+		cursor: pointer;
+		border: none;
+		outline: none;
+	}
+
+
+	.snake-modal-overlay {
+		position: absolute;
 		left: 0px;
 		top: 0px;
 		right: 0px;
 		bottom: 0px;
+		background-color: #fff;
+		.opacity(0.5);
+	}
+
+	.snake-modal(@width; @height) {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: @width;
+		height: @height;
+		margin-left: -@width/2;
+		margin-top: -@height/2;
+		border: 3px solid #e8392a;
+		border-radius: 3px;
+	}
+
+
+	.start-modal {
+		.snake-modal(180px; 64px);
+		border: none;
+		background-color: transparent;
+
+		button {
+			.snake-btn();
+			display: block;
+			width: 100%;
+			font-size: 18px;
+			line-height: 24px;
+			padding: 10px 20px;
+			border-radius: 24px;
+		}
+	}
+
+	.font(@size) {
+		font-size: @size;
+		line-height: @size;
+	}
+
+	.share-modal {
+		.snake-modal(280px, 170px);
+		background-color: #fff;
+
+		p {
+			text-align: center;
+			color: #e8392a;
+			margin: 0px;
+			line-height: 36px;
+			font-size: 18px;
+		}
+
+		text-align: center;
+		button {
+			.snake-btn();
+			.font(18px);
+			padding: 5px 12px;
+			border-radius: 14px;
+		}
+	}
+
+	.gameover-modal {
+		.snake-modal(300px; 270px);
+		background-color: transparent;
+		border: none;
+
+		.modal-inner {
+			background-color: #fff;
+			padding: 10px 0px;
+			border: 3px solid #e8392a;
+			border-radius: 3px;
+			.tips {
+				p {
+					text-align: center;
+					color: #e8392a;
+					margin: 0px;
+					line-height: 36px;
+					font-size: 18px;
+					span.score {
+						font-size: 36px;
+					}
+				}
+			}
+
+			.gift {
+				text-align: center;
+				padding: 10px 0px;
+				img, p {
+					display: inline-block;
+					vertical-align: top;
+				}
+
+				p {
+					span{
+						font-family: "微软雅黑";
+						margin: 0px;
+						.font(14px);
+						padding: 5px 0px;
+					}
+					margin: 0px;
+				}
+			}
+
+			.btns {
+				text-align: center;
+	
+				button {
+					.snake-btn();
+					.font(14px);
+					padding: 5px 12px;
+					border-radius: 13px;
+				}
+			}
+		}
 	}
 }
 

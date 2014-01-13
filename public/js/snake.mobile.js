@@ -343,6 +343,12 @@ var api = {
 			.error(api._onerror(callback));
 	},
 
+	addScoreForMobile: function(params, callback) {
+		$.post('/game/api/addScoreForMobile', params, "json")
+			.success(api._handle(callback))
+			.error(api._onerror(callback));
+	},
+
 	getRank: function(member_id, callback) {
 		$.post('/game/api/getScoreRank', {
 			member_id: member_id
@@ -381,6 +387,53 @@ var api = {
 
 				callback(null, user);
 				// callback(null, null);
+			}
+			//)
+		);
+	},
+
+	sync_score_on_mobile: function(member_id, score, callback) {
+		function _addScore(callback) {
+			api.addScoreForMobile({
+				member_id: member_id,
+				score: score
+			}, function(err, data) {
+				if (err) {
+					return callback(err);
+				}
+
+				callback(null, data.winPrize);
+			});
+		}
+
+		function _getUserInfo(winPrize, callback) {
+			api.getUserinfo(function(err, user) {
+				if (err) {
+					return callback(err);
+				}
+
+				user.winPrize = winPrize;
+				callback(null, user);
+			});
+		}
+
+		function _getRank(user, callback) {
+			api.getRank(member_id, function(err, rank) {
+				if (!err) {
+					u.extend(user, rank);
+				}
+				callback(null, user);
+			});
+		}
+
+		async.waterfall([_addScore, _getUserInfo, _getRank],
+			//u.delay(5 * 1000,
+			function(err, user) {
+				if (err) {
+					return callback(err);
+				}
+
+				callback(null, user);
 			}
 			//)
 		);
@@ -432,6 +485,15 @@ var api = {
 			}
 			//)
 		);
+	},
+
+	shareOnMobile: function(member_id, score, callback) {
+		$.post("/game/api/share", {
+			member_id: member_id,
+			score: score
+		}, "json")
+			.success(api._handle(callback))
+			.error(api._onerror(callback));	
 	}
 };
 
@@ -1090,6 +1152,24 @@ GameLayer.prototype = {
 
 ;
 
+var DIRECTION_KEYCODES = {
+    up: [38, 75, 87],
+    down: [40, 74, 83],
+    left: [37, 65, 72],
+    right: [39, 68, 76],
+};
+
+function getDirectionByKeyCode(keyCode) {
+    for (var key in DIRECTION_KEYCODES) {
+        var codelist = DIRECTION_KEYCODES[key];
+        if (~u.indexOf(codelist, keyCode)) {
+            return key;
+        }
+    }
+
+    return null;
+}
+
 function BackgroundLayer() {
 	this.bg = null;
 	this.sprite = null;
@@ -1115,6 +1195,65 @@ BackgroundLayer.prototype = {
 	}
 };
 
+function GameOverPane($el) {
+	var self = this;
+	this.$el = $el;
+	this.$gift = this.$el.find(".gift");
+	this.$tips = this.$el.find(".tips");
+
+	this.$restart = this.$el.find(".restart");
+	this.$restart.click(function() {
+		if (self.onRestartHandler) {
+			self.onRestartHandler();
+		}
+	});
+
+	this.$share = this.$el.find(".share");
+	this.$share.click(function() {
+		if (self.onShareHandler) {
+			self.onShareHandler();
+		}
+	});
+}
+
+GameOverPane.prototype = {
+	show: function() {
+		this.$el.show();
+	},
+
+	hide: function() {
+		this.$el.hide();
+		this.$share.hide();
+		this.$gift.hide();
+	},
+
+	setScore: function(score) {
+		if (score < 50) {
+			this.$tips.html("<p>你才得了</p>" +
+				"<p><span class='score'>" + score + "</span>分</p>" +
+				"<p>年兽还没吃饱，还有可能出没哦！</p>" +
+				"<p>继续加油吧</p>");
+		} else {
+			this.$tips.html("<p>你竟然得了</p>" +
+				"<p><span class='score'>" + score + "</span>分</p>" +
+				"<p>年兽很满足，暂时不会再来了！</p>");
+		}
+	},
+
+	showGift: function() {
+		this.$share.show();
+		this.$gift.show();
+	},
+
+	onRestart: function(handler) {
+		this.onRestartHandler = handler;
+	},
+
+	onShare: function(handler) {
+		this.onShareHandler = handler;
+	}
+};
+
 _Controller = {
 	setupKeyBindings: function() {
 		var self = this;
@@ -1130,6 +1269,12 @@ _Controller = {
 				}
 			};
 		}
+
+		$(document).on("keydown", while_playing(function(e) {
+            e.preventDefault();
+            var direction = getDirectionByKeyCode(e.keyCode);
+            if (direction) self.game.changeSnakeDirection(direction);
+        }));
 
 		var hammer = $(document).hammer();
 		hammer.on('touchmove', while_playing(function(e) {
@@ -1166,19 +1311,15 @@ _Controller = {
 	},
 
 	onScoreUploaded: function(user) {
-		this.user = user;
+		this.user = u.extend(this.user, user);
+		this.gameoverPane.show();
 		this.$totalScore.html(user.score);
 		_Controller.showInfo.call(this);
-		/*
-		this.showTotalScore(user.score);
-		if (user.gift) {
+		if (this.user.winPrize) {
 			this.gameoverPane.showGift();
-		} else {
-			this.gameoverPane.hideGift();
 		}
 		this.gameoverPane.setScore(this.game.score());
 		this.gameoverPane.show();
-		*/
 	},
 
 	onUploadScoreTimeout: function() {
@@ -1192,14 +1333,14 @@ _Controller = {
 
 		function _hide(func) {
 			return function() {
-				//self.loadingPane.hide();
 				if (func) {
 					func.apply(null, arguments);
 				}
 			}
 		}
 
-		api.sync_score(this.user.member_id, this.game.score(),
+		this.$overlay.show();
+		api.sync_score_on_mobile(this.user.member_id, this.game.score(),
 			//u.delay(5 * 1000,
 			u.timeup(10 * 1000,
 				_hide(function(err, data) {
@@ -1263,7 +1404,7 @@ _Controller = {
 		this.$currentScore.html(this.game ? this.game.score() : 0);
 		this.$totalScore.html(this.user.score);
 		this.$totalRank.html(this.user.total_rank);
-		this.$currentRank.html(this.user.current_rank);
+		this.$currentRank.html(this.user.today_rank);
 	}
 };
 
@@ -1288,13 +1429,47 @@ u.extend(Controller.prototype, {
 		this.bgLayer.sprite = loader.canvasSprites["canvas_bg"];
 		this.render.draw();
 
+		this.$startModal = this.$el.find(".start-modal");
+
 		if (!user) {
-			this.$control.click(function() {
-				// TODO
+			this.$startModal.on('click', 'button', function() {
+				// 跳转的指定的登录页面
+				window.location = "";
 			});
 			return;
 		}
 
+		this.$shareModal = this.$el.find(".share-modal");
+		this.$shareModal.find("button").click(function() {
+			self.$shareModal.hide();
+			self.$overlay.hide();
+			_Controller.startGame.call(self);
+		});
+
+		this.gameoverPane = new GameOverPane(this.$el.find(".gameover-modal"));
+		this.gameoverPane.onRestart(function() {
+			self.gameoverPane.hide();
+			self.$overlay.hide();
+			_Controller.startGame.call(self);
+		});
+		this.gameoverPane.onShare(function() {
+			self.gameoverPane.hide();
+			api.shareOnMobile(self.user.member_id, self.game.score(), function(err) {
+				if(err) {
+					// TODO
+					return console.error(err);
+				}
+
+				self.$shareModal.show();
+			});
+		});
+
+		this.$overlay = this.$el.find(".snake-modal-overlay");
+		this.$startModal.on('click', 'button', function() {
+			self.$overlay.hide();
+			self.$startModal.hide();
+			_Controller.startGame.call(self);
+		});
 		this.$controlbar = this.$el.find(".header");
 
 		function _ensureCanvasSize() {
@@ -1317,10 +1492,6 @@ u.extend(Controller.prototype, {
 
 		this.$control = this.$el.find(".control");
 		this.$control.click(function() {
-			if (!self.game) {
-				return _Controller.startGame.call(self);
-			}
-
 			switch (self.game.status) {
 				case Game.OVER:
 					_Controller.startGame.call(self);
