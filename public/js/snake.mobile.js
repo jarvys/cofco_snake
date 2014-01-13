@@ -1371,6 +1371,7 @@ _Controller = {
 
 	//start or resume
 	resume: function() {
+		_Controller.adjust.call(this);
 		this.game.start();
 		this.$control.addClass('pause');
 	},
@@ -1384,8 +1385,7 @@ _Controller = {
 		_Controller.newGame.call(this);
 		_Controller.kickOff.call(this);
 		_Controller.resume.call(this);
-		window.scrollTo(0, 0);
-		this.el.scrollIntoView(true);
+		_Controller.adjust.call(this);
 		this.gameLayer.setGame(this.game);
 		this.render.draw();
 	},
@@ -1403,6 +1403,10 @@ _Controller = {
 		this.$totalScore.html(this.user.score);
 		this.$totalRank.html(this.user.total_rank);
 		this.$currentRank.html(this.user.today_rank);
+	},
+
+	adjust: function() {
+		this.el.scrollIntoView(true);
 	}
 };
 
