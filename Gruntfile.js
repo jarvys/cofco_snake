@@ -137,7 +137,7 @@ module.exports = function(grunt) {
                 dest: '<%= static_dir %>/js/<%= pkg.name %>.mobile.min.js',
             }
         },
-        
+
         jshint: {
             src: [
                 'Gruntfile.js',
@@ -177,6 +177,7 @@ module.exports = function(grunt) {
     grunt.registerTask('test', []);
     grunt.registerTask('server', ['default', 'env:dev', 'express:dev', 'watch:express']);
     grunt.registerTask('default', ['concat', 'jshint', 'uglify']);
+    grunt.registerTask('generate', ['default', 'less', 'templates', 'sprite']);
     grunt.registerTask('templates', 'generate templates', function() {
         var done = this.async();
 

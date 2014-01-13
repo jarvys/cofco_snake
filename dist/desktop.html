@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <title>snake demo</title>
+    <link rel="stylesheet" type="text/css"  href="css/common.css">
+
     <!-- 游戏样式 -->
     
     <link rel="stylesheet" href="Public/game/css/snake.desktop.css" type="text/css">
@@ -10,10 +12,8 @@
 
     <!-- 为适配IE8使用flashcanvas提供canvas功能 -->
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="js/flashcanvas.js"></script>
+    <script type="text/javascript" src="Public/game/js/flashcanvas.js"></script>
     <![endif]-->
-
-    <link rel="stylesheet" type="text/css"  href="Public/game/css/common.css">
 
     <!--[if IE 6]>
     <script type="text/javascript" src="js/DD_belatedPNG_0.0.8a-min.js"></script>
@@ -42,7 +42,8 @@
                     <h2 class='total'>0</h2>
                 </div>
             </div><div class='content'>
-                <canvas class='canvas' id="snake" width="634" height="634"></canvas>
+                <canvas class='canvas' id="snake" width="500" height="500">
+                </canvas>
             </div><div class='couplet control-bar'>
                 <button class='couplet-head' id="control"></button>
                 <div class="title-pane">
@@ -280,14 +281,14 @@
 
 
     <!-- 依赖的代码库 -->
-    <script type="text/javascript" src="Public/game/js/jquery.min.js">
+    <script type="text/javascript" src="js/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="js/jquery-foxibox-0.2.min.js">
     </script>
     <script type="text/javascript" src="Public/game/js/jquery.hammer.min.js">
     </script>
     <script type="text/javascript" src="Public/game/js/async.js"></script>
 
-    <script type="text/javascript" src="Public/game/js/jquery-foxibox-0.2.min.js">
-    </script>
 
     <!-- 功能代码 -->
     

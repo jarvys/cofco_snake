@@ -334,6 +334,9 @@ u.extend(Controller.prototype, {
 				window.innerHeight - controlbar_height);
 			self.$canvas.css('width', size + "px");
 			self.$canvas.css('height', size + "px");
+			var canvasSize = Math.max(320, size / 2);
+			self.$canvas.attr("width", canvasSize);
+			self.$canvas.attr("height", canvasSize);
 			self.render.draw();
 		}
 		window.onresize = _ensureCanvasSize;
