@@ -1610,7 +1610,7 @@ u.extend(Controller.prototype, {
 		this.$controlbar = this.$el.find(".header");
 
 		function _ensureCanvasSize() {
-			var padding = 20;
+			var padding = 0;
 			var controlbar_height = self.$controlbar.outerHeight();
 			var size = Math.min(self.$el.width() - padding * 2,
 				window.innerHeight - controlbar_height);
@@ -1648,6 +1648,7 @@ u.extend(Controller.prototype, {
 });
 
 $(function() {
+    $(".snake-container-wrap").css('height', $(window).height() + 'px');
 	var controller = new Controller($(".snake-container-wrap")[0]);
 
 	async.parallel([
@@ -1662,6 +1663,7 @@ $(function() {
 		controller.onload(loader.user);
 	});
 });
+
 
 ;
 
