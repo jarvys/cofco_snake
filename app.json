@@ -1,0 +1,5 @@
+{
+	"name": "snake",
+	"script": "app.js",
+	"args": ["12581"]
+}
